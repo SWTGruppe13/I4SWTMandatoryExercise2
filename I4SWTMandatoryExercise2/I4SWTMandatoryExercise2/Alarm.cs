@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace I4SWTMandatoryExercise2
 {
-    class Alarm
+    public class Alarm
     {
-
+        public void DetectAlarm()
+        {
+            if (true) // Hvis fly'et er tæt på nogen andre fly
+            {
+                // Kald log og sæt alarm
+            }
+        }
     }
 }
