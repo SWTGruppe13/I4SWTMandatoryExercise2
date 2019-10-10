@@ -12,7 +12,11 @@ namespace I4SWTMandatoryExercise2
     {
         static void Main(string[] args)
         {
-           
+            FlightData fdtest = new FlightData();
+
+            Console.WriteLine(fdtest.CalculateCompassCourse("test", 10, 10, 0, 0));
+          
+            
             // Using the real transponder data receiver
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
