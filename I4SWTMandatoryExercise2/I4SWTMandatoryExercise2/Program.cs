@@ -14,7 +14,7 @@ namespace I4SWTMandatoryExercise2
         {
             FlightData fdtest = new FlightData();
 
-            Console.WriteLine(fdtest.CalculateCompassCourse("test", 10, 10, 0, 0));
+            Console.WriteLine(fdtest.CalculateCompassCourse(new Point(1,1), new Point(2,2)));
           
             
             // Using the real transponder data receiver
