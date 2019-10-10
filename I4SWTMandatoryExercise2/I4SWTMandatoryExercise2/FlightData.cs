@@ -4,20 +4,24 @@ namespace I4SWTMandatoryExercise2
 {
     public class FlightData
     {
-        public void SetFlightData(string id, int x, int y, int z, DateTime time, double compassCourse)
+        public void SetFlightData(string id, int x, int y, int z, DateTime time)
         {
             ID = id;
             xCoordinate = x;
             yCoordinate = y;
             zCoordinate = z;
             timestamp = time;
+        }
+
+        public void SetCompassCourse(double compassCourse)
+        {
             CompassCourse = compassCourse;
         }
 
-        public double CalculateCompassCourse(double x1, double y1, double x2, double y2)
+        public double CalculateCompassCourse(Point a, Point b)
         {
-            double w = x2 - x1;
-            double h = y2 - y1;
+            double w = b._x - a._x;
+            double h = b._y - a._y;
 
             double atan = Math.Atan(h / w) / Math.PI * 180;
             if (w < 0 || h < 0)
