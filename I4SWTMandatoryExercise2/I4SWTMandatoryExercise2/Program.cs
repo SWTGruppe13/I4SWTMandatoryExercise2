@@ -30,7 +30,7 @@ namespace I4SWTMandatoryExercise2
         } 
     }
 
-    class Point
+    public class Point
     {
         public Point(double x, double y)
         {
@@ -43,7 +43,7 @@ namespace I4SWTMandatoryExercise2
     }
 
     //Ignore this - Doesnt work
-    class Vector
+    public class Vector
     {
         public Vector(Point a, Point b)
         {
