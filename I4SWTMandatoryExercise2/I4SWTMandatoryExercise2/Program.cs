@@ -12,6 +12,7 @@ namespace I4SWTMandatoryExercise2
     {
         static void Main(string[] args)
         {
+           
             // Using the real transponder data receiver
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
