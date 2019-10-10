@@ -11,54 +11,34 @@ namespace I4SWTMandatoryExercise2
 {
     public interface IAirspace
     {
-        void CreateAirspace(double centerX, double centerY);
-        double NWCornerX { get; set; }
-        double NWCornerY { get; set; }
-
-        double NECornerX { get; set; }
-        double NECornerY { get; set; }
-
-        double SWCornerX { get; set; }
-        double SWCornerY { get; set; }
-
-        double SECornerX { get; set; }
-        double SECornerY { get; set; }
+        void CreateAirspace(double centerX, double centerY, double length);
+        Point NWCorner { get; set; }
+        Point NECorner { get; set; }
+        Point SWCorner { get; set; }
+        Point SECorner { get; set; }
+        Point Center { get; set; }
     }
-
     public class Airspace : IAirspace
     {
-        Airspace(double centerX, double centerY)
+        Airspace(double centerX, double centerY, double length)
         {
-            CreateAirspace(centerX,centerY);
+            CreateAirspace(centerX, centerY, length);
         }
-        public void CreateAirspace(double centerX, double centerY)
+        public void CreateAirspace(double centerX, double centerY, double length)
         {
-            NWCornerX = centerX - 40000;
-            NWCornerY = centerY + 40000;
-
-            NECornerX = centerX + 40000;
-            NECornerY = centerX + 40000;
-
-            SWCornerX = centerX - 40000;
-            SWCornerY = centerY - 40000;
-
-            SECornerX = centerX + 40000;
-            SECornerY = centerY - 40000;
-
+            Center = new Point(centerX,centerY);
+            NWCorner = new Point(centerX- (length / 2), centerY+(length/2));
+            NECorner = new Point(centerX + (length / 2), centerY + (length / 2));
+            SWCorner = new Point(centerX - (length / 2), centerY - (length / 2));
+            SECorner = new Point(centerX + (length / 2), centerY - (length / 2));
         }
+        public Point NWCorner { get; set; }
+        public Point NECorner { get; set; }
+        public Point SWCorner { get; set; }
+        public Point SECorner { get; set; }
+        public Point Center { get; set; }
 
-        public double NWCornerX { get; set; }
-        public double NWCornerY { get; set; }
-        public double NECornerX { get; set; }
-        public double NECornerY { get; set; }
-        public double SWCornerX { get; set; }
-        public double SWCornerY { get; set; }
-        public double SECornerX { get; set; }
-        public double SECornerY { get; set; }
-
-
-        private readonly double _minHeight = 500;
-        private readonly double _maxHeight = 500;
+        public readonly double _minHeight = 500;
+        public readonly double _maxHeight = 20000;
     }
 }
-
