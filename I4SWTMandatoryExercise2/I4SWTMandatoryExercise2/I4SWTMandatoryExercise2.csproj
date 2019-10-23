@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="Airspace.cs" />
     <Compile Include="AirSpacePlaneDetector.cs" />
-    <Compile Include="Alarm.cs" />
+    <Compile Include="CollisionDetector.cs" />
     <Compile Include="Decoder.cs" />
     <Compile Include="FlightData.cs" />
     <Compile Include="FlightDataCalculator.cs" />
