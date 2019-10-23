@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 
 namespace I4SWTMandatoryExercise2
 {
-    public class PlaneDetectorEventArgs : EventArgs
+    interface IAirSpacePlaneDetector
     {
-        public PlaneDetectorEventArgs(Point a)
-        {
-            A = a;
-        }
-
-        public Point A;
+        event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
+        void DetectAirplaneInAirspace(Dictionary<string, FlightData> planes, Airspace airspace);
+        void OnAirplaneDetected(PlaneDetectorEventArgs args);
     }
-
-    class AirSpacePlaneDetector
+    
+    public class AirSpacePlaneDetector : IAirSpacePlaneDetector
     {
         public event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
 
-        public AirSpacePlaneDetector(IDecoder de)
+        public void DetectAirplaneInAirspace(Dictionary<string, FlightData> planes, Airspace airspace)
         {
-
-        }
-        public void DetectAirplaneInAirspace(Point a, Airspace airspace)
-        {
-            if (a._x > airspace.Center._x + 40000 || a._y > airspace.Center._y + 40000 ||
-                a._x < airspace.Center._x - 40000 || a._y < airspace.Center._y - 40000)
+            List<FlightData> planesInAirspace = new List<FlightData>();
+            foreach (var plane in planes)
             {
-                return;
+                if (!(plane.Value.xCoordinate > airspace.Center._x + 40000 || plane.Value.yCoordinate > airspace.Center._y + 40000 ||
+                    plane.Value.xCoordinate < airspace.Center._x - 40000 || plane.Value.yCoordinate < airspace.Center._y - 40000 ||
+                    plane.Value.zCoordinate < airspace._minHeight || plane.Value.zCoordinate > airspace._maxHeight))
+                {
+                    planesInAirspace.Add(plane.Value);
+                }
+                
             }
+            OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesInAirspace});
 
             if (Math.Abs(a._x - airspace.Center._x) < 40000 && Math.Abs(a._y - airspace.Center._y) < 40000 &&
                 a._z > airspace._minHeight && a._z < airspace._maxHeight)
@@ -40,9 +40,13 @@ namespace I4SWTMandatoryExercise2
             OnAirplaneDetected(a);
         }
 
-        protected virtual void OnAirplaneDetected(Point a)
+        public virtual void OnAirplaneDetected(PlaneDetectorEventArgs args)
         {
-            AirplaneDetected?.Invoke(this, new PlaneDetectorEventArgs(a));
+            AirplaneDetected?.Invoke(this, args);
         }
+    }
+    public class PlaneDetectorEventArgs : EventArgs
+    {
+        public List<FlightData> PlanesInAirspace { get; set; }
     }
 }
