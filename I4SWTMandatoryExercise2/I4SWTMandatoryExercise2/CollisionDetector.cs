@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices.ComTypes;
+using NUnit.Framework;
 
 namespace I4SWTMandatoryExercise2
 {
@@ -25,6 +26,12 @@ namespace I4SWTMandatoryExercise2
                 for (int j = i + 1; j < e.PlanesInAirspace.Count; j++)
                 {
                     e.PlanesInAirspace[i].
+                }
+            for (int i = 0; i < ; i++)
+            {
+                foreach (var fly in e.PlanesInAirspace) // mangler en list til implementation
+                {
+                    if (fly >)
                 }
             }
         }
