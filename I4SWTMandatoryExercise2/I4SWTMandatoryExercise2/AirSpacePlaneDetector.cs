@@ -31,6 +31,12 @@ namespace I4SWTMandatoryExercise2
             {
                 return;
             }
+
+            if (Math.Abs(a._x - airspace.Center._x) < 40000 && Math.Abs(a._y - airspace.Center._y) < 40000 &&
+                a._z > airspace._minHeight && a._z < airspace._maxHeight)
+            {
+
+            }
             OnAirplaneDetected(a);
         }
 
