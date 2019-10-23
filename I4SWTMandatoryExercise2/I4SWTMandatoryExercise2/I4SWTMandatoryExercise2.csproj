@@ -67,10 +67,11 @@
   <ItemGroup>
     <Compile Include="Airspace.cs" />
     <Compile Include="AirSpacePlaneDetector.cs" />
+    <Compile Include="Calculator.cs" />
     <Compile Include="CollisionDetector.cs" />
     <Compile Include="Decoder.cs" />
     <Compile Include="FlightData.cs" />
-    <Compile Include="FlightDataCalculator.cs" />
+    <Compile Include="FlightDataController.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

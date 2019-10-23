@@ -26,5 +26,6 @@ namespace I4SWTMandatoryExercise2
         public int zCoordinate { get; private set; }
         public DateTime timestamp { get; private set; }
         public double CompassCourse { get; set; }
+        public double Velocity { get; set; }
     }
 }
