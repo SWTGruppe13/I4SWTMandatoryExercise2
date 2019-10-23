@@ -5,11 +5,6 @@ using TransponderReceiver;
 
 namespace I4SWTMandatoryExercise2
 {
-    public class PlaneDecodedEventArgs : EventArgs
-    {
-        public List<FlightData> Planes = new List<FlightData>();
-    }
-
     public interface IDecoder
     {
         event EventHandler<PlaneDecodedEventArgs> PlaneDecodedEvent;
@@ -66,5 +61,9 @@ namespace I4SWTMandatoryExercise2
         {
             PlaneDecodedEvent?.Invoke(this, e);
         }
+    }
+    public class PlaneDecodedEventArgs : EventArgs
+    {
+        public List<FlightData> Planes = new List<FlightData>();
     }
 }

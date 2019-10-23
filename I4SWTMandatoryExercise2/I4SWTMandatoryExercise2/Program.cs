@@ -18,6 +18,8 @@ namespace I4SWTMandatoryExercise2
             // Dependency injection with the real TDR
             var system = new Decoder(receiver);
             var airspacedetector = new AirSpacePlaneDetector(system);
+            var angleAndSpeedCalculator = new FlightDataController(airspacedetector);
+            //var collisionDetector = new CollisionDetector(airspacedetector);
 
             // Let the real TDR execute in the background
             while (true)
