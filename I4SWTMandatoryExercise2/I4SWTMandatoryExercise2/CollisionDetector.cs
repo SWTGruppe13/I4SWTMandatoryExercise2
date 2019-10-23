@@ -29,8 +29,10 @@ namespace I4SWTMandatoryExercise2
                 {
                     if ((Calculator.HorizontalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 300) &&
                         (Calculator.VerticalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 5000))
+                    {
                         Console.WriteLine("ALARM");
                         return; // ALARM event til logger
+                    }
                 }
             }
         }
