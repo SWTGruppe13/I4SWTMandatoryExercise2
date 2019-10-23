@@ -3,30 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework.Internal;
 
 namespace I4SWTMandatoryExercise2
 {
+    public class PlaneDetectorEventArgs : EventArgs
+    {
+        public PlaneDetectorEventArgs(Point a)
+        {
+            A = a;
+        }
+
+        public Point A;
+    }
+
     class AirSpacePlaneDetector
     {
-        public AirSpacePlaneDetector(IDecoder dec)
+        public event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
+
+        AirSpacePlaneDetector(IDecoder de)
         {
-            dec.PlaneDecodedEvent += TestFunc;
+
         }
-        public bool DetectAirplaneInAirspace(Point a, Airspace airspace)
+        public void DetectAirplaneInAirspace(Point a, Airspace airspace)
         {
-            if (a._x > airspace.Center._x + 40000 || a._y > airspace.Center._y + 40000 || a._x < airspace.Center._x - 40000 || a._y < airspace.Center._y - 40000)
+            if (a._x > airspace.Center._x + 40000 || a._y > airspace.Center._y + 40000 ||
+                a._x < airspace.Center._x - 40000 || a._y < airspace.Center._y - 40000)
             {
-                return false;
+                return;
             }
-
-            return true; // event skal smides
+            OnAirplaneDetected(a);
         }
 
-        public void TestFunc(object sender, PlaneDecodedEventArgs e)
+        protected virtual void OnAirplaneDetected(Point a)
         {
-            Console.WriteLine("Event triggered from Decoder");
-            Console.WriteLine($"Plane object {e.Planes}");
+            AirplaneDetected?.Invoke(this, new PlaneDetectorEventArgs(a));
         }
     }
 }
