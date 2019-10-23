@@ -16,28 +16,7 @@ namespace I4SWTMandatoryExercise2
             timestamp = time;
         }
 
-        public void SetCompassCourse(double compassCourse)
-        {
-            CompassCourse = compassCourse;
-        }
-
-        public double CalculateCompassCourse(Point a, Point b)
-        {
-            double w = b._x - a._x;
-            double h = b._y - a._y;
-
-            double atan = Math.Atan(h / w) / Math.PI * 180;
-            if (w < 0 || h < 0)
-                atan += 180;
-            if (w > 0 && h < 0)
-                atan -= 180;
-            if (atan < 0)
-                atan += 360;
-
-            double degrees = atan % 360;
-            return degrees;
-
-        }
+        
 
         // Evt. tilføj de resterende data til denne klasse
 
@@ -46,6 +25,6 @@ namespace I4SWTMandatoryExercise2
         public int yCoordinate { get; private set; }
         public int zCoordinate { get; private set; }
         public DateTime timestamp { get; private set; }
-        public double CompassCourse { get; private set; }
+        public double CompassCourse { get; set; }
     }
 }
