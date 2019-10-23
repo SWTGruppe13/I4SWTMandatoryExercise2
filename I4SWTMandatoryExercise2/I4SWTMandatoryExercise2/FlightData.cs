@@ -4,9 +4,12 @@ namespace I4SWTMandatoryExercise2
 {
     public class FlightData
     {
-        public void SetFlightData(string id, int x, int y, int z, DateTime time)
+        public FlightData(string id)
         {
             ID = id;
+        }
+        public void SetFlightData(int x, int y, int z, DateTime time)
+        {
             xCoordinate = x;
             yCoordinate = y;
             zCoordinate = z;
@@ -86,10 +89,10 @@ namespace I4SWTMandatoryExercise2
         // Evt. tilføj de resterende data til denne klasse
 
         public string ID {get; private set; }
-        public int xCoordinate { get; private set; }
-        public int yCoordinate { get; private set; }
-        public int zCoordinate { get; private set; }
-        public DateTime timestamp { get; private set; }
-        public double CompassCourse { get; private set; }
+        public int xCoordinate { get; set; }
+        public int yCoordinate { get; set; }
+        public int zCoordinate { get; set; }
+        public DateTime timestamp { get; set; }
+        public double CompassCourse { get; set; }
     }
 }

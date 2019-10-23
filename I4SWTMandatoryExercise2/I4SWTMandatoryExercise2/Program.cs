@@ -12,21 +12,16 @@ namespace I4SWTMandatoryExercise2
     {
         static void Main(string[] args)
         {
-            FlightData fdtest = new FlightData();
-
-            Console.WriteLine(fdtest.CalculateCompassCourse(new Point(1,1), new Point(2,2)));
-          
-            
             // Using the real transponder data receiver
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
             // Dependency injection with the real TDR
             var system = new Decoder(receiver);
+            var airspacedetector = new AirSpacePlaneDetector(system);
 
             // Let the real TDR execute in the background
             while (true)
                 Thread.Sleep(1000);
-
         } 
     }
 
