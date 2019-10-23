@@ -20,9 +20,12 @@ namespace I4SWTMandatoryExercise2
 
         public void HandleCollision(object sender, PlaneDetectorEventArgs e)
         {
-            foreach (var fly in e.A) // mangler en list til implementation
+            for (int i = 0; i < e.PlanesInAirspace.Count; i++)
             {
-                if ()
+                for (int j = i + 1; j < e.PlanesInAirspace.Count; j++)
+                {
+                    e.PlanesInAirspace[i].
+                }
             }
         }
     }

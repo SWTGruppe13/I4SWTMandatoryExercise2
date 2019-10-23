@@ -16,7 +16,7 @@ namespace I4SWTMandatoryExercise2
     public class AirSpacePlaneDetector : IAirSpacePlaneDetector
     {
         public event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
-        Airspace airspace = new Airspace(50000, 50000, 80000);
+        readonly Airspace _airspace = new Airspace(50000, 50000, 80000);
 
         public AirSpacePlaneDetector(IDecoder dec)
         {
@@ -28,8 +28,8 @@ namespace I4SWTMandatoryExercise2
             List<FlightData> planesInAirspace = new List<FlightData>();
             foreach (var plane in e.Planes)
             {
-                if (Math.Abs(plane.xCoordinate - airspace.Center._x) < 40000 && Math.Abs(plane.yCoordinate - airspace.Center._y) < 40000 &&
-                    plane.zCoordinate > airspace._minHeight && plane.zCoordinate < airspace._maxHeight)
+                if (Math.Abs(plane.xCoordinate - _airspace.Center._x) < 40000 && Math.Abs(plane.yCoordinate - _airspace.Center._y) < 40000 &&
+                    plane.zCoordinate > _airspace._minHeight && plane.zCoordinate < _airspace._maxHeight)
                 {
                     planesInAirspace.Add(plane);
                 }
