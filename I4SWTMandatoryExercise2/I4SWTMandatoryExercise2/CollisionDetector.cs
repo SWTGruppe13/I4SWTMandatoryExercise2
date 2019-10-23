@@ -15,7 +15,7 @@ namespace I4SWTMandatoryExercise2
     {
 
         private IAirSpacePlaneDetector _airSpacePlaneDetector;
-        CollisionDetector(IAirSpacePlaneDetector airSpacePlaneDetector)
+        public CollisionDetector(IAirSpacePlaneDetector airSpacePlaneDetector)
         {
             this._airSpacePlaneDetector = airSpacePlaneDetector;
             this._airSpacePlaneDetector.AirplaneDetected += HandleCollision;
@@ -27,19 +27,12 @@ namespace I4SWTMandatoryExercise2
             {
                 for (int j = i+1; j < e.PlanesInAirspace.Count-1; j++)
                 {
-                    if ((HorizontalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 300) &&
-                        (VerticalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 5000))
+                    if ((Calculator.HorizontalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 300) &&
+                        (Calculator.VerticalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 5000))
+                        Console.WriteLine("ALARM");
                         return; // ALARM event til logger
                 }
             }
-        }
-        public double HorizontalDistance(FlightData fd1, FlightData fd2)
-        {
-            return Math.Sqrt(Math.Pow((fd2.xCoordinate-fd1.xCoordinate),2)+Math.Pow((fd2.yCoordinate-fd1.yCoordinate),2));
-        }
-        public double VerticalDistance(FlightData fd1, FlightData fd2)
-        {
-            return Math.Sqrt(Math.Pow((fd2.xCoordinate-fd1.xCoordinate),2)+Math.Pow((fd2.zCoordinate-fd1.zCoordinate),2));
         }
     }
 }

@@ -33,12 +33,12 @@ namespace I4SWTMandatoryExercise2
             {
                 FlightData fd = StringToClass(data);
 
-                System.Console.WriteLine($"Transponderdata:\n " +
-                                         $"ID:{fd.ID}\n " +
-                                         $"x-Coordinate: {fd.xCoordinate}\n " +
-                                         $"y-Coordinate: {fd.yCoordinate}\n " +
-                                         $"z-Coordinate: {fd.zCoordinate}\n " +
-                                         $"Timestamp: {fd.timestamp}");
+                //System.Console.WriteLine($"Transponderdata:\n " +
+                //                         $"ID:{fd.ID}\n " +
+                //                         $"x-Coordinate: {fd.xCoordinate}\n " +
+                //                         $"y-Coordinate: {fd.yCoordinate}\n " +
+                //                         $"z-Coordinate: {fd.zCoordinate}\n " +
+                //                         $"Timestamp: {fd.timestamp}");
 
                 planeList.Add(fd);
             }

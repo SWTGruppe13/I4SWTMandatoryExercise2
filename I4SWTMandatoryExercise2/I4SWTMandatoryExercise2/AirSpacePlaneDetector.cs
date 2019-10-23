@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace I4SWTMandatoryExercise2
 {
-    interface IAirSpacePlaneDetector
+    public interface IAirSpacePlaneDetector
     {
         event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
         void DetectAirplaneInAirspace(object sender, PlaneDecodedEventArgs e);

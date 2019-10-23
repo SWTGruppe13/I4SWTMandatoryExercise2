@@ -13,7 +13,7 @@ namespace I4SWTMandatoryExercise2
                 Console.WriteLine("x-coordinate: {0}", fd.xCoordinate);
                 Console.WriteLine("y-coordinate: {0}", fd.yCoordinate);
                 Console.WriteLine("Altitude: {0}", fd.zCoordinate);
-                //Console.WriteLine("Horizontal Velocity: {0}", fd.Velocity); Velocity not finished
+                Console.WriteLine("Horizontal Velocity: {0}", fd.Velocity);
                 Console.WriteLine("Course direction: {0}", fd.CompassCourse);
             }
         }

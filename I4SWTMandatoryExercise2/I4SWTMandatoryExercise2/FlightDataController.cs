@@ -18,25 +18,26 @@ namespace I4SWTMandatoryExercise2
             this.airSpacePlaneDecOBJ.AirplaneDetected += ListOrganizer;
         }
 
-        private List<FlightData> flightDataListOne = new List<FlightData>();
-        private List<FlightData> flightDataListTwo = new List<FlightData>();
-
+        private List<FlightData> flightDataListNew = new List<FlightData>();
+        private List<FlightData> flightDataListOld = new List<FlightData>();
 
         public void ListOrganizer(object sender, PlaneDetectorEventArgs e)
         {
-            if (flightDataListOne.Count == 0)
+            if (flightDataListNew.Count == 0)
             {
-                flightDataListOne = e.PlanesInAirspace;
+                flightDataListNew = e.PlanesInAirspace;
             }
-            else if(flightDataListTwo.Count == 0)
+            else if(flightDataListOld.Count == 0)
             {
-                flightDataListTwo = e.PlanesInAirspace;
+                flightDataListOld = e.PlanesInAirspace;
             }
             else
             {
-                flightDataListTwo = flightDataListOne;
-                flightDataListOne = e.PlanesInAirspace;
-                Calculator.CalculateCompassCourse(flightDataListOne,flightDataListTwo);
+                flightDataListOld = flightDataListNew;
+                flightDataListNew = e.PlanesInAirspace;
+                flightDataListNew = Calculator.CalculateCompassCourse(flightDataListNew,flightDataListOld);
+                flightDataListNew = Calculator.CalculateVelocity(flightDataListNew, flightDataListOld);
+                render.Display(flightDataListNew);
             }
         }
     }

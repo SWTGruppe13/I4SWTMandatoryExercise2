@@ -19,7 +19,7 @@ namespace I4SWTMandatoryExercise2
             var system = new Decoder(receiver);
             var airspacedetector = new AirSpacePlaneDetector(system);
             var angleAndSpeedCalculator = new FlightDataController(airspacedetector);
-            //var collisionDetector = new CollisionDetector(airspacedetector);
+            var collisionDetector = new CollisionDetector(airspacedetector);
 
             // Let the real TDR execute in the background
             while (true)
