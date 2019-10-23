@@ -7,7 +7,7 @@ namespace I4SWTMandatoryExercise2
 {
     public class PlaneDecodedEventArgs : EventArgs
     {
-        public Dictionary<string, FlightData> Planes = new Dictionary<string, FlightData>();
+        public List<FlightData> Planes = new List<FlightData>();
     }
 
     public interface IDecoder
@@ -33,6 +33,7 @@ namespace I4SWTMandatoryExercise2
 
         public void Decode(object sender, RawTransponderDataEventArgs e)
         {
+            List<FlightData> planeList = new List<FlightData>();
             foreach (var data in e.TransponderData)
             {
                 FlightData fd = StringToClass(data);
@@ -44,12 +45,7 @@ namespace I4SWTMandatoryExercise2
                                          $"z-Coordinate: {fd.zCoordinate}\n " +
                                          $"Timestamp: {fd.timestamp}");
 
-                if (!planeList.ContainsKey(fd.ID))
-                { planeList.Add(fd.ID, fd); }
-                else
-                {
-                    planeList[fd.ID].SetFlightData(fd.xCoordinate, fd.yCoordinate, fd.zCoordinate, fd.timestamp);
-                }
+                planeList.Add(fd);
             }
             OnPlaneDecodedEvent(new PlaneDecodedEventArgs { Planes = planeList });
         }
