@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Runtime.InteropServices.ComTypes;
 using I4SWTMandatoryExercise2;
 using NUnit.Framework;
@@ -29,7 +30,10 @@ namespace I4SWTMandatoryExercise2
                 {
                     if ((HorizontalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 300) &&
                         (VerticalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 5000))
-                        return; // ALARM event til logger
+                    {
+                        System.Console.WriteLine("Alarm triggered");
+                        return; // ALARM : Mangler event til logger
+                    }
                 }
             }
         }
