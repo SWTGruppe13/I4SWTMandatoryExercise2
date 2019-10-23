@@ -9,11 +9,14 @@ namespace I4SWTMandatoryExercise2
     {
         public Dictionary<string, FlightData> Planes = new Dictionary<string, FlightData>();
     }
+
     public interface IDecoder
     {
         event EventHandler<PlaneDecodedEventArgs> PlaneDecodedEvent;
         void Decode(object sender, RawTransponderDataEventArgs e);
+        FlightData StringToClass(string str);
     }
+
     public class Decoder : IDecoder
     {
         private ITransponderReceiver receiver;
@@ -45,10 +48,7 @@ namespace I4SWTMandatoryExercise2
                 { planeList.Add(fd.ID, fd); }
                 else
                 {
-                    planeList[fd.ID].xCoordinate = fd.xCoordinate;
-                    planeList[fd.ID].yCoordinate = fd.yCoordinate;
-                    planeList[fd.ID].zCoordinate = fd.zCoordinate;
-                    planeList[fd.ID].timestamp = fd.timestamp;
+                    planeList[fd.ID].SetFlightData(fd.xCoordinate, fd.yCoordinate, fd.zCoordinate, fd.timestamp);
                 }
             }
             OnPlaneDecodedEvent(new PlaneDecodedEventArgs { Planes = planeList });

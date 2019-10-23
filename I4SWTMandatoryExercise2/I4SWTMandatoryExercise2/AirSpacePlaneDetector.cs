@@ -20,7 +20,7 @@ namespace I4SWTMandatoryExercise2
     {
         public event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
 
-        AirSpacePlaneDetector(IDecoder de)
+        public AirSpacePlaneDetector(IDecoder de)
         {
 
         }
