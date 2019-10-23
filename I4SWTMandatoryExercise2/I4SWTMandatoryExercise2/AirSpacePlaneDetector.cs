@@ -6,39 +6,44 @@ using System.Threading.Tasks;
 
 namespace I4SWTMandatoryExercise2
 {
-    public class PlaneDetectorEventArgs : EventArgs
-    {
-        public Point A { get; set; }
-    }
-
     interface IAirSpacePlaneDetector
     {
         event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
-        void DetectAirplaneInAirspace(Point a, Airspace airspace);
+        void DetectAirplaneInAirspace(object sender, PlaneDecodedEventArgs e);
         void OnAirplaneDetected(PlaneDetectorEventArgs args);
     }
-
+    
     public class AirSpacePlaneDetector : IAirSpacePlaneDetector
     {
         public event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
+        Airspace airspace = new Airspace(50000, 50000, 80000);
 
-        //AirSpacePlaneDetector(IDecoder de)
-        //{
-
-        //}
-        public void DetectAirplaneInAirspace(Point a, Airspace airspace)
+        public AirSpacePlaneDetector(IDecoder dec)
         {
-            if (a._x > airspace.Center._x + 40000 || a._y > airspace.Center._y + 40000 ||
-                a._x < airspace.Center._x - 40000 || a._y < airspace.Center._y - 40000)
+            dec.PlaneDecodedEvent += DetectAirplaneInAirspace;
+        }
+
+        public void DetectAirplaneInAirspace(object sender, PlaneDecodedEventArgs e)
+        {
+            List<FlightData> planesInAirspace = new List<FlightData>();
+            foreach (var plane in e.Planes)
             {
-                return;
+                if (Math.Abs(plane.xCoordinate - airspace.Center._x) < 40000 && Math.Abs(plane.yCoordinate - airspace.Center._y) < 40000 &&
+                    plane.zCoordinate > airspace._minHeight && plane.zCoordinate < airspace._maxHeight)
+                {
+                    planesInAirspace.Add(plane);
+                }
             }
-            OnAirplaneDetected(new PlaneDetectorEventArgs{A = a});
+            OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesInAirspace});
         }
 
         public virtual void OnAirplaneDetected(PlaneDetectorEventArgs args)
         {
             AirplaneDetected?.Invoke(this, args);
         }
+    }
+    public class PlaneDetectorEventArgs : EventArgs
+    {
+        public List<FlightData> PlanesInAirspace { get; set; }
     }
 }

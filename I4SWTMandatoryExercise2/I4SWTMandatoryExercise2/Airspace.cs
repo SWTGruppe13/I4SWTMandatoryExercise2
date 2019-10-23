@@ -20,7 +20,7 @@ namespace I4SWTMandatoryExercise2
     }
     public class Airspace : IAirspace
     {
-        Airspace(double centerX, double centerY, double length)
+        public Airspace(double centerX, double centerY, double length)
         {
             CreateAirspace(centerX, centerY, length);
         }
