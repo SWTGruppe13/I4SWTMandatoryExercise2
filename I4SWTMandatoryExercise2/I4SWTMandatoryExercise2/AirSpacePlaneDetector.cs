@@ -8,22 +8,24 @@ namespace I4SWTMandatoryExercise2
 {
     public class PlaneDetectorEventArgs : EventArgs
     {
-        public PlaneDetectorEventArgs(Point a)
-        {
-            A = a;
-        }
-
-        public Point A;
+        public Point A { get; set; }
     }
 
-    class AirSpacePlaneDetector
+    interface IAirSpacePlaneDetector
+    {
+        event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
+        void DetectAirplaneInAirspace(Point a, Airspace airspace);
+        void OnAirplaneDetected(PlaneDetectorEventArgs args);
+    }
+
+    public class AirSpacePlaneDetector : IAirSpacePlaneDetector
     {
         public event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
 
-        AirSpacePlaneDetector(IDecoder de)
-        {
+        //AirSpacePlaneDetector(IDecoder de)
+        //{
 
-        }
+        //}
         public void DetectAirplaneInAirspace(Point a, Airspace airspace)
         {
             if (a._x > airspace.Center._x + 40000 || a._y > airspace.Center._y + 40000 ||
@@ -31,12 +33,12 @@ namespace I4SWTMandatoryExercise2
             {
                 return;
             }
-            OnAirplaneDetected(a);
+            OnAirplaneDetected(new PlaneDetectorEventArgs{A = a});
         }
 
-        protected virtual void OnAirplaneDetected(Point a)
+        public virtual void OnAirplaneDetected(PlaneDetectorEventArgs args)
         {
-            AirplaneDetected?.Invoke(this, new PlaneDetectorEventArgs(a));
+            AirplaneDetected?.Invoke(this, args);
         }
     }
 }
