@@ -36,53 +36,6 @@ namespace I4SWTMandatoryExercise2
 
             double degrees = atan % 360;
             return degrees;
-            
-            //0 - 22.5 N
-            //22.6 - 67.5 - N E
-            // 67.6 - 112.5 E
-            // 112.6 - 157.5 S E
-            // 157.6 - 202.5 S
-            // 202.6 - 247.5 S W
-            // 247.6 - 292.5 W
-            // 292.6 - 337.5 N W
-            // 337.6 - 359.9 N
-
-            //string CompassCourse = "";
-
-            //if ((degrees >= 0 && degrees <= 22.5) || (degrees >= 337.6 && degrees <= 359.9))
-            //{
-            //    CompassCourse = "N";
-            //}
-            //else if (degrees >= 22.6 && degrees <= 67.5)
-            //{
-            //    CompassCourse = "N E";
-            //}
-            //else if (degrees >= 67.6 && degrees <= 112.5)
-            //{
-            //    CompassCourse = "E";
-            //}
-            //else if (degrees >= 112.6 && degrees <= 157.5)
-            //{
-            //    CompassCourse = "S E";
-            //}
-            //else if (degrees >= 157.6 && degrees <= 202.5)
-            //{
-            //    CompassCourse = "S";
-            //}
-            //else if (degrees >= 202.6 && degrees <= 247.5)
-            //{
-            //    CompassCourse = "S W";
-            //}
-            //else if (degrees >= 247.6 && degrees <= 292.5)
-            //{
-            //    CompassCourse = "W";
-            //}
-            //else if (degrees >= 292.6 && degrees <= 337.5)
-            //{
-            //    CompassCourse = "N W";
-            //}
-
-            //return $"Flight {id} is flying {CompassCourse} with a course {degrees}";
 
         }
 
