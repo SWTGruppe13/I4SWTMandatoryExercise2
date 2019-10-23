@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices.ComTypes;
+using NUnit.Framework;
 
 namespace I4SWTMandatoryExercise2
 {
@@ -20,9 +21,12 @@ namespace I4SWTMandatoryExercise2
 
         public void HandleCollision(object sender, PlaneDetectorEventArgs e)
         {
-            foreach (var fly in e.A) // mangler en list til implementation
+            for (int i = 0; i < ; i++)
             {
-                if ()
+                foreach (var fly in e.PlanesInAirspace) // mangler en list til implementation
+                {
+                    if (fly >)
+                }
             }
         }
     }
