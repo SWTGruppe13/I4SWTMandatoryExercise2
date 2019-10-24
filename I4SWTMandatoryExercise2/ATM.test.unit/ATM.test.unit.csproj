@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AirSpacePlaneDetectorTest.cs" />
     <Compile Include="AirspaceTest.cs" />
     <Compile Include="CalculatorTest.cs" />
     <Compile Include="Class1.cs" />
