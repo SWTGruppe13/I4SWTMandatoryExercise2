@@ -12,6 +12,7 @@ namespace I4SWTMandatoryExercise2
     {
         public void Display(List<FlightData> flightDataList)
         {
+            Console.WriteLine("list count in render: " + flightDataList.Count);
             foreach (var fd in flightDataList)
             {
                 Console.WriteLine("Flight ID: {0}", fd.ID.Substring(0, 6));

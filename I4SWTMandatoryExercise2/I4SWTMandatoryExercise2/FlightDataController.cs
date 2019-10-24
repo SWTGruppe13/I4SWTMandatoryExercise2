@@ -42,6 +42,7 @@ namespace I4SWTMandatoryExercise2
                 flightDataListNew = e.PlanesInAirspace;
                 flightDataListNew = Calculator.CalculateCompassCourse(flightDataListNew,flightDataListOld);
                 flightDataListNew = Calculator.CalculateVelocity(flightDataListNew, flightDataListOld);
+                Console.WriteLine("list count send to display: " + flightDataListNew.Count);
                 render.Display(flightDataListNew);
             }
         }
