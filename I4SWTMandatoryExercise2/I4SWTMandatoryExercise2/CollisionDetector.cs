@@ -18,8 +18,8 @@ namespace I4SWTMandatoryExercise2
         private IAirSpacePlaneDetector _airSpacePlaneDetector;
         public CollisionDetector(IAirSpacePlaneDetector airSpacePlaneDetector)
         {
-            this._airSpacePlaneDetector = airSpacePlaneDetector;
-            this._airSpacePlaneDetector.AirplaneDetected += HandleCollision;
+            //this._airSpacePlaneDetector = airSpacePlaneDetector;
+            //this._airSpacePlaneDetector.AirplaneDetected += HandleCollision;
         }
 
         public void HandleCollision(object sender, PlaneDetectorEventArgs e)
