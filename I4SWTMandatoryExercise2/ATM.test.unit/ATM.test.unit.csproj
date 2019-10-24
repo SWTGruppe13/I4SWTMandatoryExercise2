@@ -60,7 +60,6 @@
     <Compile Include="AirSpacePlaneDetectorTest.cs" />
     <Compile Include="AirspaceTest.cs" />
     <Compile Include="CalculatorTest.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="CollisionDetectorTest.cs" />
     <Compile Include="DecoderTest.cs" />
     <Compile Include="FlightDataControllerTest.cs" />
