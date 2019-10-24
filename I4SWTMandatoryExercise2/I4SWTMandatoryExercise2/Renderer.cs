@@ -3,7 +3,12 @@ using System.Collections.Generic;
 
 namespace I4SWTMandatoryExercise2
 {
-    public class Renderer
+    public interface IRenderer
+    {
+        void Display(List<FlightData> flightDataList);
+    }
+
+    public class Renderer : IRenderer
     {
         public void Display(List<FlightData> flightDataList)
         {

@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace I4SWTMandatoryExercise2
 {
-    class FlightDataController
+    internal interface IFlightDataController
+    {
+        void ListOrganizer(object sender, PlaneDetectorEventArgs e);
+    }
+
+    class FlightDataController : IFlightDataController
     {
 
         private IAirSpacePlaneDetector airSpacePlaneDecOBJ;

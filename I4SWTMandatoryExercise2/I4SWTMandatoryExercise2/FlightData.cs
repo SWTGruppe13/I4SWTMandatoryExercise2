@@ -2,7 +2,19 @@
 
 namespace I4SWTMandatoryExercise2
 {
-    public class FlightData
+    public interface IFlightData
+    {
+        void SetFlightData(int x, int y, int z, DateTime time);
+        string ID { get; }
+        int xCoordinate { get; }
+        int yCoordinate { get; }
+        int zCoordinate { get; }
+        DateTime timestamp { get; }
+        double CompassCourse { get; set; }
+        double Velocity { get; set; }
+    }
+
+    public class FlightData : IFlightData
     {
         public FlightData(string id)
         {
