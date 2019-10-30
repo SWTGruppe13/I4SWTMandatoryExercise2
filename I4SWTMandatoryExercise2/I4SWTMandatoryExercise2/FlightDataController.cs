@@ -11,7 +11,7 @@ namespace I4SWTMandatoryExercise2
         void ListOrganizer(object sender, PlaneDetectorEventArgs e);
     }
 
-    class FlightDataController : IFlightDataController
+    public class FlightDataController : IFlightDataController
     {
 
         private IAirSpacePlaneDetector airSpacePlaneDecOBJ;
