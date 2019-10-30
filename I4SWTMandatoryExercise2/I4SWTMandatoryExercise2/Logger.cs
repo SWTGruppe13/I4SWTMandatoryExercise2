@@ -15,6 +15,7 @@ namespace I4SWTMandatoryExercise2
         {
             StreamWriter sw = new StreamWriter("log.txt");
             sw.WriteLine("Alarm triggered at {0}. Involved planes: {1} and {2}", DateTime.Now.ToString(new CultureInfo("en-GB")), a.ID, b.ID);
+            sw.Close();
         }
     }
 }
