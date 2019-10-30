@@ -24,7 +24,7 @@ namespace ATM.test.unit
             receivedArgs = null;
             NumberOfEvents = 0;
 
-            _uut.HandleCollision +=
+            _uut. +=
                 (s, a) =>
                 {
                     receivedArgs = a;
