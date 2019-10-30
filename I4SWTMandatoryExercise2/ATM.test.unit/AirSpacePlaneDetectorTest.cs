@@ -11,32 +11,50 @@ namespace ATM.test.unit
 {
     class AirSpacePlaneDetectorTest
     {
-        IDecoder _decoder = Substitute.For<IDecoder>();
+        IDecoder fakeDecoder = Substitute.For<IDecoder>();
         private AirSpacePlaneDetector uut;
         private PlaneDetectorEventArgs _recivedEventArgs;
+
+        List<FlightData> planesTestData = new List<FlightData>();
+        FlightData fd = new FlightData("2");
+
 
         [SetUp]
         public void Setup()
         {
             _recivedEventArgs = null;
-            uut = new AirSpacePlaneDetector(_decoder);
+            uut = new AirSpacePlaneDetector(fakeDecoder);
             
             uut.AirplaneDetected +=
                 (o, args) =>
                 {
                     _recivedEventArgs = args;
                 };
+
+            fd.SetFlightData(0, 0, 0, DateTime.Now);
+            planesTestData.Add(fd);
+
+            fd.SetFlightData(50000,50000,5000,DateTime.Now);
+            planesTestData.Add(fd);
         }
 
         [Test]
-        public void testname()
+        public void event_fired_on_planeDetector_from_decoder_might_not_be_needed()
         {
-            FlightData fd = new FlightData("2");
-            fd.SetFlightData(7000,7000,7000,DateTime.Now);
-            List<FlightData> planesTestData = new List<FlightData>();
-            planesTestData.Add(fd);
-            _decoder.PlaneDecodedEvent += Raise.EventWith(new PlaneDecodedEventArgs{Planes = planesTestData});
+            fakeDecoder.PlaneDecodedEvent += Raise.EventWith(new PlaneDecodedEventArgs{Planes = planesTestData});
             Assert.That(_recivedEventArgs, Is.Not.Null);
+        }
+
+        [Test]
+        public void event_fired_from_planeDetector()
+        {
+            bool wasCalled = false;
+
+            uut.AirplaneDetected += (o, e) => wasCalled = true;
+            uut.DetectAirplaneInAirspace(new object(),new PlaneDecodedEventArgs());
+
+            Assert.That(wasCalled, Is.True);
+
         }
 
     }

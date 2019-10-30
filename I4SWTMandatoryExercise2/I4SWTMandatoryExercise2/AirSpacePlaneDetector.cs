@@ -34,7 +34,6 @@ namespace I4SWTMandatoryExercise2
                     planesInAirspace.Add(plane);
                 }
             }
-            Console.WriteLine("list count send to controller: " + planesInAirspace.Count);
             OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesInAirspace});
         }
 
