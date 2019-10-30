@@ -17,6 +17,7 @@ namespace I4SWTMandatoryExercise2
     {
         public event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
         readonly Airspace _airspace = new Airspace(50000, 50000, 80000);
+        List<FlightData> planesInAirspace = new List<FlightData>();
 
         public AirSpacePlaneDetector(IDecoder dec)
         {
@@ -25,7 +26,6 @@ namespace I4SWTMandatoryExercise2
 
         public void DetectAirplaneInAirspace(object sender, PlaneDecodedEventArgs e)
         {
-            List<FlightData> planesInAirspace = new List<FlightData>();
             foreach (var plane in e.Planes)
             {
                 if (Math.Abs(plane.xCoordinate - _airspace.Center._x) < 40000 && Math.Abs(plane.yCoordinate - _airspace.Center._y) < 40000 &&
@@ -34,7 +34,6 @@ namespace I4SWTMandatoryExercise2
                     planesInAirspace.Add(plane);
                 }
             }
-            Console.WriteLine("list count send to controller: " + planesInAirspace.Count);
             OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesInAirspace});
         }
 
