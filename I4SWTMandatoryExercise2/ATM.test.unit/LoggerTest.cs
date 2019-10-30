@@ -15,14 +15,12 @@ namespace ATM.test.unit
         public FlightData plane1;
         public FlightData plane2;
         private Logger uut = new Logger();
-        private DateTime time;
 
         [SetUp]
         public void Setup()
         {
             plane1 = new FlightData("AB01234");
             plane2 = new FlightData("YZ98765");
-            time = DateTime.Now;
         }
 
         [Test]
@@ -41,7 +39,6 @@ namespace ATM.test.unit
             StringAssert.Contains(string.Format("Alarm triggered at {0}. Involved planes: {1} and {2}",
                 DateTime.Now.ToString(new CultureInfo("en-GB")), plane1.ID, plane2.ID),
                 File.ReadAllText("log.txt"));
-            
         }
     }
 }

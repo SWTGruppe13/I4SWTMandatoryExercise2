@@ -31,10 +31,10 @@ namespace ATM.test.unit
                     _recivedEventArgs = args;
                 };
 
-            fd.SetFlightData(1000000, 1000000, 0, DateTime.Now);
+            fd.SetFlightData(100000000, 100000000, 0, new DateTime());
             planesTestData.Add(fd);
 
-            fd.SetFlightData(50000,50000,5000,DateTime.Now);
+            fd.SetFlightData(50000, 50000, 5000, new DateTime());
             planesTestData.Add(fd);
         }
 
@@ -64,7 +64,7 @@ namespace ATM.test.unit
         {
             uut.DetectAirplaneInAirspace(new object(), new PlaneDecodedEventArgs{ Planes = planesTestData });
             
-            Assert.That(_recivedEventArgs.PlanesInAirspace.Count, Is.EqualTo(2));
+            Assert.That(_recivedEventArgs.PlanesInAirspace.Count, Is.EqualTo(1));
         }
 
     }

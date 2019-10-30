@@ -6,12 +6,17 @@ namespace I4SWTMandatoryExercise2
 {
     public class Calculator
     {
-        public static List<FlightData> CalculateCompassCourse(List<FlightData> PlainDataList1, List<FlightData> PlainDataList2)
+        // Function takes two lists of plane data, one old and one current, and a list of planes with the current coordinates as well as their courses
+        public static List<FlightData> CalculateCompassCourse(List<FlightData> planeDataList1, List<FlightData> planeDataList2)
         {
-            var listOneAndTwo = PlainDataList1.Zip(PlainDataList2, (l1, l2) => new { List1 = l1, List2 = l2 });
-            var listToReturn = new List<FlightData>();
+            // Zips the two plane lists together for use in a foreach loop
+            var listOneAndTwo = planeDataList1.Zip(planeDataList2, (l1, l2) => new { List1 = l1, List2 = l2 });
+            var listToReturn = new List<FlightData>(); // Initializes the list containing the return values
+
+            // Iterates through all of the planes in the parameter lists
             foreach (var flight in listOneAndTwo)
             {
+                // Calculates the course in degrees, adds it to the flight object and adds the object to the list of return values
                 double width = flight.List2.xCoordinate - flight.List1.xCoordinate;
                 double height = flight.List2.yCoordinate - flight.List1.yCoordinate;
 
@@ -31,14 +36,20 @@ namespace I4SWTMandatoryExercise2
             return listToReturn;
         }
 
-        public static List<FlightData> CalculateVelocity(List<FlightData> PlainDataList1, List<FlightData> PlainDataList2)
+        public static List<FlightData> CalculateVelocity(List<FlightData> planeDataList1, List<FlightData> planeDataList2)
         {
-            var listOneAndTwo = PlainDataList1.Zip(PlainDataList2, (l1, l2) => new { List1 = l1, List2 = l2 });
-            var listToReturn = new List<FlightData>();
+            // Zips the two plane lists together for use in a foreach loop
+            var listOneAndTwo = planeDataList1.Zip(planeDataList2, (l1, l2) => new { List1 = l1, List2 = l2 });
+            var listToReturn = new List<FlightData>(); // Initializes the list containing the return values
+
+            // Iterates through all of the planes in the parameter lists
             foreach (var flight in listOneAndTwo)
             {
-                var diffInSecs = (flight.List2.timestamp - flight.List1.timestamp).TotalSeconds;
-                flight.List1.Velocity = HorizontalDistance(flight.List2, flight.List1) / diffInSecs;
+                var diffInSecs = (flight.List2.timestamp - flight.List1.timestamp).TotalSeconds; // Calculates the time between the two data points of the flight
+
+                // NOTE: Why is the order of flight one and two reversed? does it give a wrong result? or is it due to the zipping of the lists?
+                flight.List1.Velocity = (HorizontalDistance(flight.List2, flight.List1)+VerticalDistance(flight.List2, flight.List1)) / diffInSecs; // Divides the horizontal distance between the two data points with the time spent between them
+
                 listToReturn.Add(flight.List1);
             }
             return listToReturn;
@@ -50,7 +61,7 @@ namespace I4SWTMandatoryExercise2
         }
         public static double VerticalDistance(FlightData fd1, FlightData fd2)
         {
-            return Math.Sqrt(Math.Pow((fd2.xCoordinate - fd1.xCoordinate), 2) + Math.Pow((fd2.zCoordinate - fd1.zCoordinate), 2));
+            return Math.Abs(fd2.zCoordinate-fd1.zCoordinate);
         }
     }
 }
