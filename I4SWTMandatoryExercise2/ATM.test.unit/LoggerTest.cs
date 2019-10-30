@@ -39,7 +39,7 @@ namespace ATM.test.unit
         {
             uut.Log(plane1, plane2);
             StringAssert.Contains(string.Format("Alarm triggered at {0}. Involved planes: {1} and {2}",
-                DateTime.Now.ToString(new CultureInfo("en - GB")), plane1.ID, plane2.ID),
+                DateTime.Now.ToString(new CultureInfo("en-GB")), plane1.ID, plane2.ID),
                 File.ReadAllText("log.txt"));
             
         }
