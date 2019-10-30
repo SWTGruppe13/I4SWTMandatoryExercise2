@@ -17,19 +17,19 @@ namespace ATM.test.unit
         private PlaneDetectorEventArgs receivedArgs;
         private int NumberOfEvents;
 
-        [SetUp]
-        public void Setup()
-        {
-            _uut = new CollisionDetector(_airSpacePlaneDetector);
-            receivedArgs = null;
-            NumberOfEvents = 0;
+        //[SetUp]
+        //public void Setup()
+        //{
+        //    _uut = new CollisionDetector(_airSpacePlaneDetector);
+        //    receivedArgs = null;
+        //    NumberOfEvents = 0;
 
-            _uut.HandleCollision +=
-                (s, a) =>
-                {
-                    receivedArgs = a;
-                    NumberOfEvents++;
-                };
-        }
+        //    _uut.HandleCollision +=
+        //        (s, a) =>
+        //        {
+        //            receivedArgs = a;
+        //            NumberOfEvents++;
+        //        };
+        //}
     }
 }
