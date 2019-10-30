@@ -36,6 +36,8 @@ namespace ATM.test.unit
 
             fd.SetFlightData(50000,50000,5000,DateTime.Now);
             planesTestData.Add(fd);
+
+            planesTestData.Add(fd);
         }
 
         [Test]
@@ -63,7 +65,7 @@ namespace ATM.test.unit
         public void planes_in_list_passed_to_subscriber_is_two()
         {
             uut.DetectAirplaneInAirspace(new object(), new PlaneDecodedEventArgs{ Planes = planesTestData });
-            
+            //uut.OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesTestData });
             Assert.That(_recivedEventArgs.PlanesInAirspace.Count, Is.EqualTo(2));
         }
 
