@@ -16,8 +16,8 @@ namespace ATM.test.unit
         private PlaneDetectorEventArgs _recivedEventArgs;
 
         List<FlightData> planesTestData = new List<FlightData>();
-        FlightData fd = new FlightData("2");
-
+        FlightData fd1 = new FlightData("1");
+        FlightData fd2 = new FlightData("2");
 
         [SetUp]
         public void Setup()
@@ -31,13 +31,11 @@ namespace ATM.test.unit
                     _recivedEventArgs = args;
                 };
 
-            fd.SetFlightData(100000000, 100000000, 0, new DateTime());
-            planesTestData.Add(fd);
+            fd1.SetFlightData(100000000, 100000000, 0, new DateTime());
+            planesTestData.Add(fd1);
 
-            fd.SetFlightData(50000, 50000, 5000, new DateTime());
-            planesTestData.Add(fd);
-
-            planesTestData.Add(fd);
+            fd2.SetFlightData(50000, 50000, 5000, new DateTime());
+            planesTestData.Add(fd2);
         }
 
         [Test]
@@ -62,11 +60,11 @@ namespace ATM.test.unit
 
 
         [Test]
-        public void planes_in_list_passed_to_subscriber_is_two()
+        public void Invalid_Coordinates_Not_Added_To_Airspace()
         {
             uut.DetectAirplaneInAirspace(new object(), new PlaneDecodedEventArgs{ Planes = planesTestData });
             //uut.OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesTestData });
-            Assert.That(_recivedEventArgs.PlanesInAirspace.Count, Is.EqualTo(2));
+            Assert.That(_recivedEventArgs.PlanesInAirspace.Count, Is.EqualTo(1));
         }
 
     }
