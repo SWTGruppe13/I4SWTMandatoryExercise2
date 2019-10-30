@@ -43,6 +43,7 @@ namespace I4SWTMandatoryExercise2
             AirplaneDetected?.Invoke(this, args);
         }
     }
+
     public class PlaneDetectorEventArgs : EventArgs
     {
         public List<FlightData> PlanesInAirspace { get; set; }
