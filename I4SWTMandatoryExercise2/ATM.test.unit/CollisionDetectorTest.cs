@@ -15,7 +15,6 @@ namespace ATM.test.unit
     {
         private CollisionDetector _uut;
         private CollisionDetectedEventArgs receivedArgs;
-        private int NumberOfEvents;
         private IAirSpacePlaneDetector _fakeAirspacePlaneDetector;
 
         [SetUp]
@@ -24,18 +23,16 @@ namespace ATM.test.unit
             _fakeAirspacePlaneDetector = Substitute.For<IAirSpacePlaneDetector>();
             _uut = new CollisionDetector(_fakeAirspacePlaneDetector);
             receivedArgs = null;
-            NumberOfEvents = 0;
 
             _uut.CollisionDetectedEvent +=
                 (s, a) =>
                 {
                     receivedArgs = a;
-                    NumberOfEvents++;
                 };
         }
 
         //[Test]
-        //public void PlaneDetectorEvent_RaisedEvent()
+        //public void PlaneDetectorEvent_CollisionDetector_RaisedEvent()
         //{
         //    _fakeAirspacePlaneDetector.AirplaneDetected += Raise.EventWith(new object(), new PlaneDetectorEventArgs());
         //}
