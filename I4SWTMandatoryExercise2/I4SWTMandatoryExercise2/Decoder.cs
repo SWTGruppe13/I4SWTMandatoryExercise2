@@ -10,13 +10,13 @@ namespace I4SWTMandatoryExercise2
         event EventHandler<PlaneDecodedEventArgs> PlaneDecodedEvent;
         void Decode(object sender, RawTransponderDataEventArgs e);
         FlightData StringToClass(string str);
+        void OnPlaneDecodedEvent(PlaneDecodedEventArgs e);
     }
 
     public class Decoder : IDecoder
     {
         private ITransponderReceiver receiver;
         public event EventHandler<PlaneDecodedEventArgs> PlaneDecodedEvent;
-        Dictionary<string, FlightData> planeList = new Dictionary<string, FlightData>();
 
         public Decoder(ITransponderReceiver receiver)
         {
@@ -58,7 +58,7 @@ namespace I4SWTMandatoryExercise2
             return fd;
         }
 
-        protected virtual void OnPlaneDecodedEvent(PlaneDecodedEventArgs e)
+        public virtual void OnPlaneDecodedEvent(PlaneDecodedEventArgs e)
         {
             PlaneDecodedEvent?.Invoke(this, e);
         }

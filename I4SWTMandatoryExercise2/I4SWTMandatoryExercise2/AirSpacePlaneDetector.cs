@@ -28,13 +28,15 @@ namespace I4SWTMandatoryExercise2
         {
             foreach (var plane in e.Planes)
             {
-                if (Math.Abs(plane.xCoordinate - _airspace.Center._x) < 40000 && Math.Abs(plane.yCoordinate - _airspace.Center._y) < 40000 &&
-                    plane.zCoordinate > _airspace._minHeight && plane.zCoordinate < _airspace._maxHeight)
+                if ((Math.Abs(plane.xCoordinate - _airspace.Center._x) < (_airspace.SideLength / 2)) &&
+                    (Math.Abs(plane.yCoordinate - _airspace.Center._y) < (_airspace.SideLength / 2)) &&
+                    (plane.zCoordinate > _airspace.MinHeight) &&
+                    (plane.zCoordinate < _airspace.MaxHeight))
                 {
                     planesInAirspace.Add(plane);
                 }
             }
-            OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesInAirspace});
+            if(planesInAirspace.Count > 0) OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesInAirspace});
         }
 
         public virtual void OnAirplaneDetected(PlaneDetectorEventArgs args)
