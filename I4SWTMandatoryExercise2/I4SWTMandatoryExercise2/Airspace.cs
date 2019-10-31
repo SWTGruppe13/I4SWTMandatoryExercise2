@@ -23,10 +23,6 @@ namespace I4SWTMandatoryExercise2
         public void CreateAirspace(double centerX, double centerY, double length)
         {
             Center = new Point(centerX,centerY);
-            NWCorner = new Point(centerX - (length / 2), centerY + (length / 2));
-            NECorner = new Point(centerX + (length / 2), centerY + (length / 2));
-            SWCorner = new Point(centerX - (length / 2), centerY - (length / 2));
-            SECorner = new Point(centerX + (length / 2), centerY - (length / 2));
         }
         public Point Center { get; set; }
 
