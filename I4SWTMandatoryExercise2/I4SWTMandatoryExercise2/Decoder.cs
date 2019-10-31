@@ -43,6 +43,7 @@ namespace I4SWTMandatoryExercise2
 
                 planeList.Add(fd);
             }
+
             OnPlaneDecodedEvent(new PlaneDecodedEventArgs { Planes = planeList });
         }
 
