@@ -15,7 +15,6 @@ namespace ATM.test.unit
     class CollisionDetectorTest
     {
         private CollisionDetector _uut;
-        private CollisionDetectedEventArgs receivedArgs;
         private IAirSpacePlaneDetector _fakeAirspacePlaneDetector;
         private List<FlightData> _testPlanes;
         private CollisionDetectedEventArgs _receivedArgs;

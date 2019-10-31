@@ -17,7 +17,6 @@ namespace I4SWTMandatoryExercise2
     {
         private ITransponderReceiver receiver;
         public event EventHandler<PlaneDecodedEventArgs> PlaneDecodedEvent;
-        Dictionary<string, FlightData> planeList = new Dictionary<string, FlightData>();
 
         public Decoder(ITransponderReceiver receiver)
         {

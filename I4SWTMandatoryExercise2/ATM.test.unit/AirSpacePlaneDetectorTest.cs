@@ -11,64 +11,76 @@ namespace ATM.test.unit
 {
     class AirSpacePlaneDetectorTest
     {
-        IDecoder fakeDecoder = Substitute.For<IDecoder>();
-        private AirSpacePlaneDetector uut;
-        private PlaneDetectorEventArgs _recivedEventArgs;
+        IDecoder _fakeDecoder = Substitute.For<IDecoder>();
+        private AirSpacePlaneDetector _uut;
+        private PlaneDetectorEventArgs _receivedEventArgs;
 
-        List<FlightData> planesTestData; 
-        FlightData fd1 = new FlightData("1");
-        FlightData fd2 = new FlightData("2");
+        private List<FlightData> _planesTestData; 
+        private FlightData fd1 = new FlightData("1");
+        private FlightData fd2 = new FlightData("2");
 
         [SetUp]
         public void Setup()
         {
-            _recivedEventArgs = null;
-            uut = new AirSpacePlaneDetector(fakeDecoder);
-            planesTestData = new List<FlightData>();
+            _uut = new AirSpacePlaneDetector(_fakeDecoder);
+            _planesTestData = new List<FlightData>();
+            _receivedEventArgs = null;
 
-            uut.AirplaneDetected +=
+            _uut.AirplaneDetected +=
                 (o, args) =>
                 {
-                    _recivedEventArgs = args;
+                    _receivedEventArgs = args;
                 };
+        }
 
+        [Test]
+        public void event_fired_on_planeDetector_from_decoder()
+        {
             fd1.SetFlightData(100000000, 100000000, 0, new DateTime());
-            planesTestData.Add(fd1);
-
             fd2.SetFlightData(50000, 50000, 5000, new DateTime());
-            planesTestData.Add(fd2);
+
+            _planesTestData.Add(fd1);
+            _planesTestData.Add(fd2);
+
+            _fakeDecoder.PlaneDecodedEvent += Raise.EventWith(new PlaneDecodedEventArgs{Planes = _planesTestData});
+            Assert.That(_receivedEventArgs, Is.Not.Null);
         }
 
-        [Test]
-        public void event_fired_on_planeDetector_from_decoder_might_not_be_needed()
+        [TestCase(10000,10000,500)] // Lower boundaries in Airspace
+        [TestCase(10001,10001,501)] // Lower boundaries + 1
+        [TestCase(90000,90000,20000)] // Upper boundaries in Airspace
+        [TestCase(89999,89999,19999)] // Upper boundaries -1
+        public void valid_coordinate_for_plane_in_airspace_raisedEvent(int X1, int Y1, int Z1)
         {
-            fakeDecoder.PlaneDecodedEvent += Raise.EventWith(new PlaneDecodedEventArgs{Planes = planesTestData});
-            Assert.That(_recivedEventArgs, Is.Not.Null);
+            fd1.SetFlightData(X1,Y1,Z1, new DateTime());
+
+            _planesTestData.Add(fd1);
+
+            _fakeDecoder.PlaneDecodedEvent += Raise.EventWith(new PlaneDecodedEventArgs{Planes = _planesTestData});
+            Assert.That(_receivedEventArgs, Is.Not.Null);
         }
 
-        [Test]
-        public void event_fired_from_planeDetector()
+        [TestCase(9999,9999,499)] // Lower boundaries in Airspace
+        [TestCase(9998,9998,498)] // Lower boundaries - 1
+        [TestCase(90001,90001,20001)] // Upper boundaries in Airspace
+        [TestCase(90002,90002,20002)] // Upper boundaries + 1
+        public void Invalid_coordinate_for_plane_in_airspace_NoEvent(int X1, int Y1, int Z1)
         {
-            bool wasCalled = false;
+            fd1.SetFlightData(X1,Y1,Z1, new DateTime());
 
-            uut.AirplaneDetected += (o, e) => wasCalled = true;
-            uut.DetectAirplaneInAirspace(new object(),new PlaneDecodedEventArgs());
+            _planesTestData.Add(fd1);
 
-            Assert.That(wasCalled, Is.True);
-
+            _fakeDecoder.PlaneDecodedEvent += Raise.EventWith(new PlaneDecodedEventArgs{Planes = _planesTestData});
+            Assert.That(_receivedEventArgs, Is.Null);
         }
-
 
         [Test]
         public void Invalid_Coordinates_Not_Added_To_Airspace_1Valid_1Invalid_in_List_Expect1()
         {
-            uut.DetectAirplaneInAirspace(new object(), new PlaneDecodedEventArgs{ Planes = planesTestData });
+            _uut.DetectAirplaneInAirspace(new object(), new PlaneDecodedEventArgs{ Planes = _planesTestData });
             //uut.OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesTestData });
-            Assert.That(_recivedEventArgs.PlanesInAirspace.Count, Is.EqualTo(1));
+            Assert.That(_receivedEventArgs.PlanesInAirspace.Count, Is.EqualTo(1));
         }
-
-
-
 
     }
 }
