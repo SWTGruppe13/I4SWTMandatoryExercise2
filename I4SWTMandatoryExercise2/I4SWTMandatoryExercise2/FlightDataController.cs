@@ -14,6 +14,8 @@ namespace I4SWTMandatoryExercise2
     public class FlightDataController : IFlightDataController
     {
 
+        private List<FlightData> flightDataListNew = new List<FlightData>();
+        private List<FlightData> flightDataListOld = new List<FlightData>();
         private IAirSpacePlaneDetector airSpacePlaneDecOBJ;
         Renderer render = new Renderer(); // interface injection some time
 
@@ -23,8 +25,6 @@ namespace I4SWTMandatoryExercise2
             this.airSpacePlaneDecOBJ.AirplaneDetected += ListOrganizer;
         }
 
-        private List<FlightData> flightDataListNew = new List<FlightData>();
-        private List<FlightData> flightDataListOld = new List<FlightData>();
 
         public void ListOrganizer(object sender, PlaneDetectorEventArgs e)
         {

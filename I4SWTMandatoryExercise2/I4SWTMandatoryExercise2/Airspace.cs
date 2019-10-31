@@ -5,8 +5,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
 namespace I4SWTMandatoryExercise2
 {
     public interface IAirspace
@@ -28,5 +26,6 @@ namespace I4SWTMandatoryExercise2
 
         public readonly double MinHeight = 500;
         public readonly double MaxHeight = 20000;
+        public readonly double SideLength = 80000;
     }
 }
