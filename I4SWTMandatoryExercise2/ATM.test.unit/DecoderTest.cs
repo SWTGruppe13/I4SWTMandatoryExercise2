@@ -17,7 +17,7 @@ namespace ATM.test.unit
     {
         public IDecoder Uut { get; set; }
         public ITransponderReceiver FakeTransponderReceiver { get; set; }
-        public PlaneDecodedEventArgs DecodeEventArgs { get; set; }
+        public PlaneDecodedEventArgs DecodeEventArgs { get; set; }  //Used to save event args from Decoder.decode function.
 
         [SetUp]
         public void Setup()
@@ -32,13 +32,13 @@ namespace ATM.test.unit
         public void DataConvertedTest() //Converts string to FD class
         {
             var testFlightData = Uut.StringToClass("ATR423;39045;12932;14000;20151006213456789");
-            Assert.Multiple(() =>
+            Assert.Multiple(() =>                                   //check data in Flight Data was input correctly
             {
                 StringAssert.AreEqualIgnoringCase("ATR423", testFlightData.ID);
                 Assert.That(testFlightData.xCoordinate, Is.EqualTo(39045));
                 Assert.That(testFlightData.yCoordinate, Is.EqualTo(12932));
                 Assert.That(testFlightData.zCoordinate, Is.EqualTo(14000));
-                Assert.That(testFlightData.timestamp, Is.EqualTo(new DateTime(2015, 10, 06, 21, 34, 56, 789)));
+                Assert.That(testFlightData.timestamp, Is.EqualTo(new DateTime(2015, 10, 06, 21, 34, 56, 789))); 
             });
         }
 
@@ -48,22 +48,12 @@ namespace ATM.test.unit
             var list = new List<string>();
             list.Add("ATR423;39045;12932;14000;20151006213456789");
 
-            Uut.PlaneDecodedEvent += (o, e) => { DecodeEventArgs = e; };
+            Uut.PlaneDecodedEvent += (o, e) => { DecodeEventArgs = e; };    //Subscribe with lambda so eventargs can be accessed
 
-            FakeTransponderReceiver.TransponderDataReady += Raise.EventWith(new object(),
-                new RawTransponderDataEventArgs(list));
+            FakeTransponderReceiver.TransponderDataReady += Raise.EventWith(new object(),new RawTransponderDataEventArgs(list));                      
 
-            Assert.Multiple(() =>
-            {
-                StringAssert.AreEqualIgnoringCase("ATR423", DecodeEventArgs.Planes[0].ID);
-                Assert.That(DecodeEventArgs.Planes[0].xCoordinate, Is.EqualTo(39045));
-                Assert.That(DecodeEventArgs.Planes[0].yCoordinate, Is.EqualTo(12932));
-                Assert.That(DecodeEventArgs.Planes[0].zCoordinate, Is.EqualTo(14000));
-                Assert.That(DecodeEventArgs.Planes[0].timestamp, Is.EqualTo(new DateTime(2015, 10, 06, 21, 34, 56, 789)));
-            });
+            Assert.NotNull(DecodeEventArgs);            //Assert that event args was instantiated, and the function was called
         }
-
-
 
         [Test]
         public void OnPlaneDecodedEventWasRaised()
