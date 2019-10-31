@@ -11,7 +11,6 @@ namespace I4SWTMandatoryExercise2
     {
         event EventHandler<CollisionDetectedEventArgs> CollisionDetectedEvent;
         void OnPlaneDetectorEvent(object sender, PlaneDetectorEventArgs e);
-        void OnCollisionDetectedEvent(object sender, CollisionDetectedEventArgs e);
     }
 
     public class CollisionDetectedEventArgs : EventArgs
@@ -52,7 +51,7 @@ namespace I4SWTMandatoryExercise2
                 }
             }
         }
-        public void OnCollisionDetectedEvent(object sender, CollisionDetectedEventArgs e)
+        private void OnCollisionDetectedEvent(object sender, CollisionDetectedEventArgs e)
         {
             CollisionDetectedEvent?.Invoke(this,e);
         }

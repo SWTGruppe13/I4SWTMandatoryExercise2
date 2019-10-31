@@ -10,7 +10,6 @@ namespace I4SWTMandatoryExercise2
     {
         event EventHandler<PlaneDetectorEventArgs> AirplaneDetected;
         void DetectAirplaneInAirspace(object sender, PlaneDecodedEventArgs e);
-        void OnAirplaneDetected(PlaneDetectorEventArgs args);
     }
     
     public class AirSpacePlaneDetector : IAirSpacePlaneDetector
@@ -39,7 +38,7 @@ namespace I4SWTMandatoryExercise2
             if(planesInAirspace.Count > 0) OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesInAirspace});
         }
 
-        public virtual void OnAirplaneDetected(PlaneDetectorEventArgs args)
+        private void OnAirplaneDetected(PlaneDetectorEventArgs args)
         {
             AirplaneDetected?.Invoke(this, args);
         }
