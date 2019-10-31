@@ -11,8 +11,6 @@ namespace ATM.test.unit
     class CalculatorTest
     {
         [TestCase(0, 0, 0, 0, 0)]           // Zero Values
-        [TestCase(0, 10, 0, 0, 90)]         // No change in y-direction
-        [TestCase(0, 0, 0, 50, 0)]          // No change in x-direction
         [TestCase(0, 0, 0, 1, 0)]           // 0 degrees
         [TestCase(0, 1, 0, 100, 0.5)]       // 1st quadrant - Close to 0/360 degrees
         [TestCase(0, 100, 0, 1, 89.5)]      // 1st quadrant - Close to 90 degrees
@@ -94,6 +92,29 @@ namespace ATM.test.unit
             resultList = Calculator.CalculateCompassCourse(list1, list2);
 
             Assert.That(resultList[0].CompassCourse, Is.EqualTo(45));
+        }
+
+        [TestCase(0, 1, 0, 1, 1.4)]
+        public void CalculateVelocity(int xCoordinate1, int xCoordinate2, int yCoordinate1, int yCoordinate2, double result)
+        {
+
+            FlightData fd1 = new FlightData("1");
+            FlightData fd2 = new FlightData("2");
+
+            fd1.SetFlightData(xCoordinate1, yCoordinate1, 0, new DateTime(2019, 10, 31, 13, 45, 0));
+            fd2.SetFlightData(xCoordinate2, yCoordinate2, 0, new DateTime(2019, 10, 31, 13, 45, 1));
+
+            List<FlightData> list1 = new List<FlightData>();
+            List<FlightData> list2 = new List<FlightData>();
+
+            list1.Add(fd1);
+            list2.Add(fd2);
+
+            List<FlightData> resultList = new List<FlightData>();
+
+            resultList = Calculator.CalculateVelocity(list1, list2);
+
+            Assert.That(resultList[0].Velocity, Is.EqualTo(result).Within(0.1));
         }
 
         [TestCase(1, 5, 1, 5, 5.6)]     // Simple functionality
