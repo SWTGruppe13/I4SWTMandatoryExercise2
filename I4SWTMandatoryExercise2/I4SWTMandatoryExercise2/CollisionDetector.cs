@@ -29,6 +29,7 @@ namespace I4SWTMandatoryExercise2
     {
         public event EventHandler<CollisionDetectedEventArgs> CollisionDetectedEvent;
         private IAirSpacePlaneDetector _airSpacePlaneDetector;
+        Renderer render = new Renderer();
         public CollisionDetector(IAirSpacePlaneDetector airSpacePlaneDetector)
         {
             this._airSpacePlaneDetector = airSpacePlaneDetector;
@@ -44,7 +45,7 @@ namespace I4SWTMandatoryExercise2
                     if ((Calculator.HorizontalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 300) &&
                         (Calculator.VerticalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 5000))
                     {
-                        Console.WriteLine("ALARM");
+                        render.DisplayAlarm();
                         OnCollisionDetectedEvent(this,new CollisionDetectedEventArgs(e.PlanesInAirspace[i],e.PlanesInAirspace[j]));
                         return; // ALARM event til logger
                     }

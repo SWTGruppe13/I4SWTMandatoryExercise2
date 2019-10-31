@@ -31,20 +31,18 @@ namespace I4SWTMandatoryExercise2
             if (flightDataListNew.Count == 0)
             {
                 flightDataListNew = e.PlanesInAirspace;
+                return;
             }
             else if(flightDataListOld.Count == 0)
             {
                 flightDataListOld = e.PlanesInAirspace;
             }
-            else
-            {
-                flightDataListOld = flightDataListNew;
-                flightDataListNew = e.PlanesInAirspace;
-                flightDataListNew = Calculator.CalculateCompassCourse(flightDataListNew,flightDataListOld);
-                flightDataListNew = Calculator.CalculateVelocity(flightDataListNew, flightDataListOld);
-                Console.WriteLine("list count send to display: " + flightDataListNew.Count);
-                render.Display(flightDataListNew);
-            }
+            flightDataListOld = flightDataListNew;
+            flightDataListNew = e.PlanesInAirspace;
+            flightDataListNew = Calculator.CalculateCompassCourse(flightDataListNew,flightDataListOld);
+            flightDataListNew = Calculator.CalculateVelocity(flightDataListNew, flightDataListOld);
+            Console.WriteLine("list count send to display: " + flightDataListNew.Count);
+            render.DisplayData(flightDataListNew);
         }
     }
 }

@@ -10,8 +10,18 @@ namespace ATM.test.unit
 {
     class CalculatorTest
     {
-        [TestCase(0, 0, 0, 0, 0)]   // Zero Values
-        public void Calculate_Course(int xCoordinate1, int xCoordinate2, int yCoordinate1, int yCoordinate2, int result)
+        [TestCase(0, 0, 0, 0, 0)]           // Zero Values
+        [TestCase(0, 10, 0, 0, 90)]         // No change in y-direction
+        [TestCase(0, 0, 0, 50, 0)]          // No change in x-direction
+        [TestCase(0, 1, 0, 100, 0.5)]        // 1st quadrant - Close to 0/360 degrees
+        [TestCase(0, 100, 0, 1, 89.4)]        // 1st quadrant - Close to 90 degrees
+        [TestCase(0, 100, 0, -1, 90.6)]      // 2nd quadrant - Close to 90 degrees
+        [TestCase(0, 1, 0, -100, 179)]      // 2nd quadrant - Close to 180 degrees
+        [TestCase(0, -1, 0, -100, 181)]     // 3rd quadrant - Close to 180 degrees
+        [TestCase(0, -100, 0, -1, 269)]     // 3rd quadrant - Close to 270 degrees
+        [TestCase(0, -100, 0, 1, 271)]      // 4th quadrant - Close to 270 degrees
+        [TestCase(0, -1, 0, 100, 359)]      // 4th quadrant - Close to 0/360 degrees
+        public void Calculate_Course(int xCoordinate1, int xCoordinate2, int yCoordinate1, int yCoordinate2, double result)
         {
             FlightData fd1 = new FlightData("1");
             FlightData fd2 = new FlightData("2");
@@ -27,7 +37,9 @@ namespace ATM.test.unit
 
             List<FlightData> resultList = new List<FlightData>();
 
-            Assert.That(resultList[0].CompassCourse, Is.EqualTo(result));
+            resultList = Calculator.CalculateCompassCourse(list1, list2);
+
+            Assert.That(resultList[0].CompassCourse, Is.EqualTo(result).Within(0.1));
         }
 
         [Test]
