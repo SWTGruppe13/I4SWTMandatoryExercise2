@@ -12,10 +12,6 @@ namespace I4SWTMandatoryExercise2
     public interface IAirspace
     {
         void CreateAirspace(double centerX, double centerY, double length);
-        Point NWCorner { get; set; }
-        Point NECorner { get; set; }
-        Point SWCorner { get; set; }
-        Point SECorner { get; set; }
         Point Center { get; set; }
     }
     public class Airspace : IAirspace
