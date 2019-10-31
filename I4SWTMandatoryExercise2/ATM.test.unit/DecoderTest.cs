@@ -42,7 +42,8 @@ namespace ATM.test.unit
 
             Uut.PlaneDecodedEvent += (o, e) => wasCalled = true; //lambda expression to subscribe on the event
 
-            Uut.Decode(new object(),new RawTransponderDataEventArgs(Substitute.For<List<string>>())); //Raise the event
+            //Call Decode with a empty List only tests if the event is raised as it then doesn't use the foreach loop.
+            Uut.Decode(new object(),new RawTransponderDataEventArgs(Substitute.For<List<string>>())); 
 
             Assert.True(wasCalled);                       
         }
