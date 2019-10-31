@@ -32,14 +32,13 @@ namespace ATM.test.unit
 
         }
 
-        //[Test] // Test til event
-        //public void PlaneDetectorEvent_FlightdataController_RaisedEvent()
-        //{
-        //    _fakeAirSpacePlaneDetector.AirplaneDetected += Raise.EventWith<PlaneDetectorEventArgs>(
-        //        this,
-        //        new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
+        [Test] // Test til event
+        public void PlaneDetectorEvent_FlightdataController_RaisedEvent()
+        {
+            _fakeAirSpacePlaneDetector.AirplaneDetected += Raise.EventWith<PlaneDetectorEventArgs>(
+                this,
+                new PlaneDetectorEventArgs() { PlanesInAirspace = _testPlanes });
 
-        //    Assert.That(_uut.ListOrganizer()
-        //}
+        }
     }
 }

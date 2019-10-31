@@ -42,17 +42,15 @@ namespace ATM.test.unit
             FlightData F1 = new FlightData("1");
             FlightData F2 = new FlightData("2");
 
-            bool wasCalled = false;
             F1.SetFlightData(8000,8000,8000, new DateTime());
             F2.SetFlightData(8000,8000,8000, new DateTime());
 
             _testPlanes.Add(F1);
             _testPlanes.Add(F2);
 
-            _uut.CollisionDetectedEvent += (o, e) => wasCalled = true;
             _uut.OnPlaneDetectorEvent(new object(), new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
 
-            Assert.That(wasCalled, Is.True);
+            Assert.That(_receivedArgs, Is.Not.Null);
         }
 
         [TestCase(5000,5000,4701,5000,7000,6000)] // 299 horizontal x-distance between two planes
