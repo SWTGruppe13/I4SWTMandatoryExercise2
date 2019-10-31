@@ -58,9 +58,8 @@ namespace ATM.test.unit
         }
 
 
-
         [Test]
-        public void Invalid_Coordinates_Not_Added_To_Airspace()
+        public void Invalid_Coordinates_Not_Added_To_Airspace_1Valid_1Invalid_in_List_Expect1()
         {
             uut.DetectAirplaneInAirspace(new object(), new PlaneDecodedEventArgs{ Planes = planesTestData });
             //uut.OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesTestData });
