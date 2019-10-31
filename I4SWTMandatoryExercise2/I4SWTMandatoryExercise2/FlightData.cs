@@ -32,7 +32,7 @@ namespace I4SWTMandatoryExercise2
 
         // Evt. tilføj de resterende data til denne klasse
 
-        public string ID {get; private set; }
+        public string ID { get; }
         public int xCoordinate { get; private set; }
         public int yCoordinate { get; private set; }
         public int zCoordinate { get; private set; }
