@@ -15,7 +15,7 @@ namespace ATM.test.unit
         private AirSpacePlaneDetector uut;
         private PlaneDetectorEventArgs _recivedEventArgs;
 
-        List<FlightData> planesTestData = new List<FlightData>();
+        List<FlightData> planesTestData; 
         FlightData fd1 = new FlightData("1");
         FlightData fd2 = new FlightData("2");
 
@@ -24,7 +24,8 @@ namespace ATM.test.unit
         {
             _recivedEventArgs = null;
             uut = new AirSpacePlaneDetector(fakeDecoder);
-            
+            planesTestData = new List<FlightData>();
+
             uut.AirplaneDetected +=
                 (o, args) =>
                 {
@@ -65,6 +66,9 @@ namespace ATM.test.unit
             //uut.OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesTestData });
             Assert.That(_recivedEventArgs.PlanesInAirspace.Count, Is.EqualTo(1));
         }
+
+
+
 
     }
 }
