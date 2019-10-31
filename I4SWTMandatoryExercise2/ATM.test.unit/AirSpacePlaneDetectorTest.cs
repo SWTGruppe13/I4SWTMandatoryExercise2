@@ -40,7 +40,7 @@ namespace ATM.test.unit
         }
 
         [Test]
-        public void event_fired_on_planeDetector_from_decoder_might_not_be_needed()
+        public void Event_Fired_In_PlaneDetector_From_Decoder_Event()
         {
             fakeDecoder.PlaneDecodedEvent += Raise.EventWith(new PlaneDecodedEventArgs{Planes = planesTestData});
             Assert.That(_recivedEventArgs, Is.Not.Null);
@@ -55,7 +55,6 @@ namespace ATM.test.unit
             uut.DetectAirplaneInAirspace(new object(),new PlaneDecodedEventArgs());
 
             Assert.That(wasCalled, Is.True);
-
         }
 
 
