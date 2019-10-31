@@ -10,7 +10,6 @@ namespace I4SWTMandatoryExercise2
         event EventHandler<PlaneDecodedEventArgs> PlaneDecodedEvent;
         void Decode(object sender, RawTransponderDataEventArgs e);
         FlightData StringToClass(string str);
-        void OnPlaneDecodedEvent(PlaneDecodedEventArgs e);
     }
 
     public class Decoder : IDecoder
@@ -58,7 +57,7 @@ namespace I4SWTMandatoryExercise2
             return fd;
         }
 
-        public virtual void OnPlaneDecodedEvent(PlaneDecodedEventArgs e)
+        private void OnPlaneDecodedEvent(PlaneDecodedEventArgs e)
         {
             PlaneDecodedEvent?.Invoke(this, e);
         }
