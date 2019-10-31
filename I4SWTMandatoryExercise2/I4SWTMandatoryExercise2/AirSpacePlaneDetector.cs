@@ -28,8 +28,10 @@ namespace I4SWTMandatoryExercise2
         {
             foreach (var plane in e.Planes)
             {
-                if (Math.Abs(plane.xCoordinate - _airspace.Center._x) < 40000 && Math.Abs(plane.yCoordinate - _airspace.Center._y) < 40000 &&
-                    plane.zCoordinate > _airspace._minHeight && plane.zCoordinate < _airspace._maxHeight)
+                if ((Math.Abs(plane.xCoordinate - _airspace.Center._x) < (_airspace.Center._x / 2)) &&
+                    (Math.Abs(plane.yCoordinate - _airspace.Center._y) < (_airspace.Center._x / 2)) &&
+                    (plane.zCoordinate > _airspace._minHeight) &&
+                    (plane.zCoordinate < _airspace._maxHeight))
                 {
                     planesInAirspace.Add(plane);
                 }
