@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace I4SWTMandatoryExercise2
 {
-    public class Calculator
+    public static class Calculator
     {
         // Function takes two lists of plane data, one old and one current, and a list of planes with the current coordinates as well as their courses
         public static List<FlightData> CalculateCompassCourse(List<FlightData> planeDataList1, List<FlightData> planeDataList2)
