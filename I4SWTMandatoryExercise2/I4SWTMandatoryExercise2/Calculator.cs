@@ -23,19 +23,17 @@ namespace I4SWTMandatoryExercise2
                 double atan = 0;
                 if (xDirection != 0)
                 {
-                    atan = Math.Atan(Math.Abs(xDirection) / Math.Abs(yDirection)) / Math.PI * 180;
+                    atan = Math.Atan(xDirection / yDirection) / Math.PI * 180;
                 }
                 else
                 {
-                    atan = Math.Atan(Math.Abs(xDirection)) / Math.PI * 180;
+                    atan = Math.Atan(xDirection) / Math.PI * 180;
                 }
                 
-                if (xDirection > 0 && yDirection < 0)
-                    atan += 90;
-                else if (xDirection < 0 && yDirection < 0)
+                if (yDirection < 0) // 2nd quadrant
                     atan += 180;
-                else if (xDirection < 0 && yDirection > 0)
-                    atan += 270;
+                else if (xDirection < 0 && yDirection >= 0) // 4th quadrant
+                    atan += 360;
 
                 double degrees = atan;
 
