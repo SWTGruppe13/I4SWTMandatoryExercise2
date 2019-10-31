@@ -36,11 +36,30 @@ namespace ATM.test.unit
                 };
         }
 
+        [Test]
+        public void CollisionDetectorEvent_RaisedEvent()
+        {
+            FlightData F1 = new FlightData("1");
+            FlightData F2 = new FlightData("2");
+
+            bool wasCalled = false;
+            F1.SetFlightData(8000,8000,8000, new DateTime());
+            F2.SetFlightData(8000,8000,8000, new DateTime());
+
+            _testPlanes.Add(F1);
+            _testPlanes.Add(F2);
+
+            _uut.CollisionDetectedEvent += (o, e) => wasCalled = true;
+            _uut.OnPlaneDetectorEvent(new object(), new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
+
+            Assert.That(wasCalled, Is.True);
+        }
+
         [TestCase(5000,5000,4701,5000,7000,6000)] // 299 horizontal x-distance between two planes
         [TestCase(5000,5000,4702,5000,7000,6000)] // 298 horizontal x-distance between two planes
         [TestCase(4701,5000,5000,5000,7000,6000)] // 299 horizontal y-distance between two planes
         [TestCase(4702,5000,5000,5000,7000,6000)] // 298 horizontal y-distance between two planes
-        public void PlaneDetectorEvent_CollisionDetector_RaisedEvent(int X1,int X2,int Y1,int Y2,int Z1,int Z2)
+        public void PlaneDetectorEvent_HorizontalCases_RaisedEvent(int X1,int X2,int Y1,int Y2,int Z1,int Z2)
         {
             FlightData F1 = new FlightData("1");
             FlightData F2 = new FlightData("2");
@@ -62,7 +81,7 @@ namespace ATM.test.unit
         [TestCase(5000,5000,4699,5000,7000,6000)] // 301 horizontal x-distance between two planes
         [TestCase(4700,5000,5000,5000,7000,6000)] // 300 horizontal y-distance between two planes
         [TestCase(4699,5000,5000,5000,7000,6000)] // 301 horizontal y-distance between two planes
-        public void PlaneDetectorEvent_CollisionDetector_NotRaisedEvent(int X1,int X2,int Y1,int Y2,int Z1,int Z2)
+        public void PlaneDetectorEvent_HorizontalCases_NotRaisedEvent(int X1,int X2,int Y1,int Y2,int Z1,int Z2)
         {
             FlightData F1 = new FlightData("1");
             FlightData F2 = new FlightData("2");
@@ -80,74 +99,8 @@ namespace ATM.test.unit
             Assert.That(_receivedArgs, Is.Null);
         }
 
-
-        [Test]
-        public void CollisionDetectorEvent_RaisedEvent()
-        {
-            FlightData F1 = new FlightData("1");
-            FlightData F2 = new FlightData("2");
-
-            bool wasCalled = false;
-            F1.SetFlightData(8000,8000,8000, new DateTime());
-            F2.SetFlightData(8000,8000,8000, new DateTime());
-
-            _testPlanes.Add(F1);
-            _testPlanes.Add(F2);
-
-            _uut.CollisionDetectedEvent += (o, e) => wasCalled = true;
-            _uut.OnPlaneDetectorEvent(new object(), new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
-
-            Assert.That(wasCalled, Is.True);
-        }
-
-
-
-        [TestCase(5000,5000,4701,5000,7000,6000)] // 299 horizontal x-distance between two planes
-        [TestCase(5000,5000,4702,5000,7000,6000)] // 298 horizontal x-distance between two planes
-        [TestCase(4701,5000,5000,5000,7000,6000)] // 299 horizontal y-distance between two planes
-        [TestCase(4702,5000,5000,5000,7000,6000)] // 298 horizontal y-distance between two planes
-        public void CollisionDetectorEvent_HorizontalCases_RaisedEvent(int X1,int X2,int Y1,int Y2,int Z1,int Z2)
-        {
-            FlightData F1 = new FlightData("1");
-            FlightData F2 = new FlightData("2");
-
-            bool wasCalled = false;
-            F1.SetFlightData(X1,Y1,Z1, new DateTime());
-            F2.SetFlightData(X2,Y2,Z2, new DateTime());
-
-            _testPlanes.Add(F1);
-            _testPlanes.Add(F2);
-
-            _uut.CollisionDetectedEvent += (o, e) => wasCalled = true;
-            _uut.OnPlaneDetectorEvent(new object(), new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
-
-            Assert.That(wasCalled, Is.True);
-        }
-
-        [TestCase(5000,5000,4700,5000,7000,6000)] // 300 horizontal x-distance between two planes
-        [TestCase(5000,5000,4699,5000,7000,6000)] // 301 horizontal x-distance between two planes
-        [TestCase(4700,5000,5000,5000,7000,6000)] // 300 horizontal y-distance between two planes
-        [TestCase(4699,5000,5000,5000,7000,6000)] // 301 horizontal y-distance between two planes
-        public void CollisionDetectorEvent_HorizontalCases_NoEvent(int X1,int X2,int Y1,int Y2,int Z1,int Z2)
-        {
-            FlightData F1 = new FlightData("1");
-            FlightData F2 = new FlightData("2");
-
-            bool wasCalled = false;
-            F1.SetFlightData(X1,Y1,Z1, new DateTime());
-            F2.SetFlightData(X2,Y2,Z2, new DateTime());
-
-            _testPlanes.Add(F1);
-            _testPlanes.Add(F2);
-
-            _uut.CollisionDetectedEvent += (o, e) => wasCalled = true;
-            _uut.OnPlaneDetectorEvent(new object(), new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
-
-            Assert.That(wasCalled, Is.False);
-        }
-
-        [TestCase(5000,5000,5000,5000,8000,3001)] // 4999 horizontal z-distance between two planes
-        [TestCase(5000,5000,5000,5000,8000,3002)] // 4998 horizontal z-distance between two planes
+        [TestCase(5000,5000,5000,5000,8000,3001)] // 4999 vertical z-distance between two planes
+        [TestCase(5000,5000,5000,5000,8000,3002)] // 4998 vertical z-distance between two planes
         public void CollisionDetectorEvent_VerticalCases_RaisedEvent(int X1,int X2,int Y1,int Y2,int Z1,int Z2)
         {
             FlightData F1 = new FlightData("1");
@@ -160,10 +113,32 @@ namespace ATM.test.unit
             _testPlanes.Add(F1);
             _testPlanes.Add(F2);
 
-            _uut.CollisionDetectedEvent += (o, e) => wasCalled = true;
-            _uut.OnPlaneDetectorEvent(new object(), new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
+            _fakeAirspacePlaneDetector.AirplaneDetected += Raise.EventWith<PlaneDetectorEventArgs>(
+                this,
+                new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
 
-            Assert.That(wasCalled, Is.True);
+            Assert.That(_receivedArgs, Is.Not.Null);
+        }
+
+        [TestCase(5000,5000,5000,5000,8000,3000)] // 5000 vertical z-distance between two planes
+        [TestCase(5000,5000,5000,5000,8000,2999)] // 5001 vertical z-distance between two planes
+        public void CollisionDetectorEvent_VerticalCases_NoEvent(int X1,int X2,int Y1,int Y2,int Z1,int Z2)
+        {
+            FlightData F1 = new FlightData("1");
+            FlightData F2 = new FlightData("2");
+
+            bool wasCalled = false;
+            F1.SetFlightData(X1,Y1,Z1, new DateTime());
+            F2.SetFlightData(X2,Y2,Z2, new DateTime());
+
+            _testPlanes.Add(F1);
+            _testPlanes.Add(F2);
+
+            _fakeAirspacePlaneDetector.AirplaneDetected += Raise.EventWith<PlaneDetectorEventArgs>(
+                this,
+                new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
+
+            Assert.That(_receivedArgs, Is.Null);
         }
     }
 }
