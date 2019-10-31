@@ -24,7 +24,7 @@ namespace ATM.test.unit
         }
 
         [Test]
-        public void Logfile_Exists()
+        public void Logfile_Created_On_Initial_Call()
         {
             uut.Log(plane1, plane2);
             Assert.IsTrue(File.Exists("log.txt"));

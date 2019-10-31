@@ -32,13 +32,9 @@ namespace I4SWTMandatoryExercise2
             SWCorner = new Point(centerX - (length / 2), centerY - (length / 2));
             SECorner = new Point(centerX + (length / 2), centerY - (length / 2));
         }
-        public Point NWCorner { get; set; }
-        public Point NECorner { get; set; }
-        public Point SWCorner { get; set; }
-        public Point SECorner { get; set; }
         public Point Center { get; set; }
 
-        public readonly double _minHeight = 500;
-        public readonly double _maxHeight = 20000;
+        public readonly double MinHeight = 500;
+        public readonly double MaxHeight = 20000;
     }
 }

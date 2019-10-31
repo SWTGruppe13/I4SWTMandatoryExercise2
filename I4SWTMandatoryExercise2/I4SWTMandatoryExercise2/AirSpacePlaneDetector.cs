@@ -36,7 +36,7 @@ namespace I4SWTMandatoryExercise2
                     planesInAirspace.Add(plane);
                 }
             }
-            OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesInAirspace});
+            if(planesInAirspace.Count > 0) OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesInAirspace});
         }
 
         public virtual void OnAirplaneDetected(PlaneDetectorEventArgs args)
