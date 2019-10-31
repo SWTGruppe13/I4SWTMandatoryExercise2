@@ -17,18 +17,27 @@ namespace I4SWTMandatoryExercise2
             foreach (var flight in listOneAndTwo)
             {
                 // Calculates the course in degrees, adds it to the flight object and adds the object to the list of return values
-                double width = flight.List2.xCoordinate - flight.List1.xCoordinate;
-                double height = flight.List2.yCoordinate - flight.List1.yCoordinate;
+                double xDirection = flight.List2.xCoordinate - flight.List1.xCoordinate;
+                double yDirection = flight.List2.yCoordinate - flight.List1.yCoordinate;
 
-                double atan = Math.Atan(height / width) / Math.PI * 180;
-                if (width < 0 || height < 0)
+                double atan = 0;
+                if (xDirection != 0)
+                {
+                    atan = Math.Atan(Math.Abs(xDirection) / Math.Abs(yDirection)) / Math.PI * 180;
+                }
+                else
+                {
+                    atan = Math.Atan(Math.Abs(xDirection)) / Math.PI * 180;
+                }
+                
+                if (xDirection > 0 && yDirection < 0)
+                    atan += 90;
+                else if (xDirection < 0 && yDirection < 0)
                     atan += 180;
-                if (width > 0 && height < 0)
-                    atan -= 180;
-                if (atan < 0)
-                    atan += 360;
+                else if (xDirection < 0 && yDirection > 0)
+                    atan += 270;
 
-                double degrees = atan % 360;
+                double degrees = atan;
 
                 flight.List1.CompassCourse = degrees;
                 listToReturn.Add(flight.List1);
