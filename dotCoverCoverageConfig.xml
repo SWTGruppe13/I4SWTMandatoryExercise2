@@ -20,9 +20,7 @@
         <FunctionMask>*</FunctionMask>
       </FilterEntry>
       <FilterEntry>
-        <ModuleMask>I4SWTMandatoryExercise2</ModuleMask>
         <ClassMask>Program</ClassMask>
-        <FunctionMask>*</FunctionMask>
       </FilterEntry>
     </ExcludeFilters>
   </Filters>
