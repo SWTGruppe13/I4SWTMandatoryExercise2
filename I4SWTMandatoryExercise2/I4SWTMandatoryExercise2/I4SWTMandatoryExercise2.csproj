@@ -69,6 +69,7 @@
     <Compile Include="AirSpacePlaneDetector.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="CollisionDetector.cs" />
+    <Compile Include="ConsoleWriter.cs" />
     <Compile Include="Decoder.cs" />
     <Compile Include="FlightData.cs" />
     <Compile Include="FlightDataController.cs" />

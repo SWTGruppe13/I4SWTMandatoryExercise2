@@ -16,10 +16,13 @@ namespace I4SWTMandatoryExercise2
 
     public class FlightData : IFlightData
     {
+        // Sets the ID of the plane when it is constructed as it should not change after construction
         public FlightData(string id)
         {
             ID = id;
         }
+
+        // Sets all FlightData apart from the ID
         public void SetFlightData(int x, int y, int z, DateTime time)
         {
             xCoordinate = x;
@@ -27,10 +30,6 @@ namespace I4SWTMandatoryExercise2
             zCoordinate = z;
             timestamp = time;
         }
-
-        
-
-        // Evt. tilføj de resterende data til denne klasse
 
         public string ID { get; }
         public int xCoordinate { get; private set; }
