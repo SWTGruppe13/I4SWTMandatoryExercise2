@@ -11,7 +11,7 @@ namespace ATM.test.unit
     {
         public IDecoder Uut { get; set; }
         public ITransponderReceiver FakeTransponderReceiver { get; set; }
-        public PlaneDecodedEventArgs DecodeEventArgs { get; set; }  //Used to save event args from Decoder.decode function.
+        public PlaneDecodedEventArgs DecodeEventArgs { get; set; } //Used to save event args from Decoder.decode function.
 
         [SetUp]
         public void Setup()
