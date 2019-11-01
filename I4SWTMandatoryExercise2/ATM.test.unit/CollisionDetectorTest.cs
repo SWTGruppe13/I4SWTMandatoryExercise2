@@ -31,7 +31,7 @@ namespace ATM.test.unit
         }
 
         [Test]
-        public void CollisionDetectorEvent_LoggerCalled()
+        public void CollisionDetected_LoggerCalled()
         {
             FlightData F1 = new FlightData("1");
             FlightData F2 = new FlightData("2");
@@ -93,7 +93,7 @@ namespace ATM.test.unit
 
         [TestCase(5000, 5000, 5000, 5000, 8000, 3001)] // 4999 vertical z-distance between two planes
         [TestCase(5000, 5000, 5000, 5000, 8000, 3002)] // 4998 vertical z-distance between two planes
-        public void CollisionDetectorEvent_VerticalCases_LoggerCalled(int X1, int X2, int Y1, int Y2, int Z1, int Z2)
+        public void CollisionDetected_VerticalCases_LoggerCalled(int X1, int X2, int Y1, int Y2, int Z1, int Z2)
         {
             FlightData F1 = new FlightData("1");
             FlightData F2 = new FlightData("2");
@@ -114,7 +114,7 @@ namespace ATM.test.unit
 
         [TestCase(5000, 5000, 5000, 5000, 8000, 3000)] // 5000 vertical z-distance between two planes
         [TestCase(5000, 5000, 5000, 5000, 8000, 2999)] // 5001 vertical z-distance between two planes
-        public void CollisionDetectorEvent_VerticalCases_LoggerNotCalled(int X1, int X2, int Y1, int Y2, int Z1, int Z2)
+        public void CollisionNotDetected_VerticalCases_LoggerNotCalled(int X1, int X2, int Y1, int Y2, int Z1, int Z2)
         {
             FlightData F1 = new FlightData("1");
             FlightData F2 = new FlightData("2");

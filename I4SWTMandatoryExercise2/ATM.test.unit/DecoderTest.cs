@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Castle.Core.Smtp;
 using I4SWTMandatoryExercise2;
 using NSubstitute;
 using NUnit.Framework;

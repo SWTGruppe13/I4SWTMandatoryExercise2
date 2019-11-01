@@ -27,21 +27,24 @@ namespace I4SWTMandatoryExercise2
 
         public void Decode(object sender, RawTransponderDataEventArgs e)
         {
-
-            List<FlightData> planeList = new List<FlightData>();
+            List<FlightData> planeList = new List<FlightData>(); // List to add the planes to
+            // Iterates through the list of strings received from the TransponderReceiver, decodes the string into FlightData objects and adds them to a list
             foreach (var data in e.TransponderData)
             {
                 FlightData fd = StringToClass(data);
                 planeList.Add(fd);
             }
 
-            OnPlaneDecodedEvent(new PlaneDecodedEventArgs { Planes = planeList });
+            OnPlaneDecodedEvent(new PlaneDecodedEventArgs { Planes = planeList }); // Invokes the PlaneDecodedEvent event
         }
 
+        // Turns a string in the TransponderReceiver format into an appropriate class
         public FlightData StringToClass(string str)
         {
-            string[] strList = str.Split(';');
-            FlightData fd = new FlightData(strList[0]);
+            string[] strList = str.Split(';'); // Separates the string int an array based off of semicolons
+
+            FlightData fd = new FlightData(strList[0]); // Creates a FlightData object and sets its ID
+            // Sets the remaining data from the TransponderReceiver
             fd.SetFlightData(Int32.Parse(strList[1]),
             Int32.Parse(strList[2]),
             Int32.Parse(strList[3]),

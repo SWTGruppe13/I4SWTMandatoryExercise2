@@ -16,11 +16,12 @@ namespace I4SWTMandatoryExercise2
         public FlightDataController(IAirSpacePlaneDetector airSpacePlaneDetector)
         {
             this.airSpacePlaneDecOBJ = airSpacePlaneDetector;
-            this.airSpacePlaneDecOBJ.AirplaneDetected += ListController;
+            this.airSpacePlaneDecOBJ.AirplaneDetected += ListController; // Subscribes to the vent from AirSpacePlaneDetector
         }
 
         public void ListController(object sender, PlaneDetectorEventArgs e)
         {
+            // If no previous data is present it has no base from which to calculate the velocity and the course, so the function returns
             if (flightDataListOld.Count <= 0)
             {
                 flightDataListOld = e.PlanesInAirspace;
@@ -28,12 +29,13 @@ namespace I4SWTMandatoryExercise2
             }
 
             List<FlightData> listToReturn = new List<FlightData>();
+            // Calculates the course and velocity based on the new flight data that has been sent and the previously sent data
             listToReturn = Calculator.CalculateCompassCourse(flightDataListOld, e.PlanesInAirspace);
             listToReturn = Calculator.CalculateVelocity(flightDataListOld, e.PlanesInAirspace);
 
-            render.DisplayData(listToReturn);
+            render.DisplayData(listToReturn); // Displays the data after it has been calculated
 
-            flightDataListOld = e.PlanesInAirspace;
+            flightDataListOld = e.PlanesInAirspace; // The new flight data has been calculated and displayed and now replaces the old flight data
         }
     }
 }

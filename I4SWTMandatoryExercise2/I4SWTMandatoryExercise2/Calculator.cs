@@ -62,10 +62,13 @@ namespace I4SWTMandatoryExercise2
             return listToReturn;
         }
 
+        // Returns the horizontal distance travelled between two plane objects
         public static double HorizontalDistance(FlightData fd1, FlightData fd2)
         {
             return Math.Sqrt(Math.Pow((fd2.xCoordinate - fd1.xCoordinate), 2) + Math.Pow((fd2.yCoordinate - fd1.yCoordinate), 2));
         }
+
+        // Returns the vertical distance travelled between two plane objects
         public static double VerticalDistance(FlightData fd1, FlightData fd2)
         {
             return Math.Abs(fd2.zCoordinate-fd1.zCoordinate);
