@@ -21,6 +21,7 @@ namespace ATM.test.unit
         {
             plane1 = new FlightData("AB01234");
             plane2 = new FlightData("YZ98765");
+            File.Delete("log.txt");
         }
 
         [Test]
@@ -33,12 +34,26 @@ namespace ATM.test.unit
         }
 
         [Test]
-        public void Text_Logged_Is_Correct()
+        public void Text_Logged_Is_Correct_Single_Occurence()
         {
             uut.Log(plane1, plane2);
             StringAssert.Contains(string.Format("Alarm triggered at {0}. Involved planes: {1} and {2}",
                 DateTime.Now.ToString(new CultureInfo("en-GB")), plane1.ID, plane2.ID),
                 File.ReadAllText("log.txt"));
+        }
+
+        [Test]
+        public void Text_Logged_Is_Correct_Multiple_Occurences()
+        {
+            uut.Log(plane1, plane2);
+            uut.Log(plane1, plane2);
+
+            StreamWriter sw = File.AppendText("testlog.txt");
+            sw.WriteLine("Alarm triggered at {0}. Involved planes: {1} and {2}", DateTime.Now.ToString(new CultureInfo("en-GB")), plane1.ID, plane2.ID);
+            sw.WriteLine("Alarm triggered at {0}. Involved planes: {1} and {2}", DateTime.Now.ToString(new CultureInfo("en-GB")), plane1.ID, plane2.ID);
+            sw.Close();
+
+            FileAssert.AreEqual("log.txt", "testlog.txt");
         }
     }
 }

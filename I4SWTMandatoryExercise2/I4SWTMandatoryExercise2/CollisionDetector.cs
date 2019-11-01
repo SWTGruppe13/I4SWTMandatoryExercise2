@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Data;
-using System.Runtime.InteropServices.ComTypes;
-using I4SWTMandatoryExercise2;
-using NUnit.Framework;
 
 namespace I4SWTMandatoryExercise2
 {
