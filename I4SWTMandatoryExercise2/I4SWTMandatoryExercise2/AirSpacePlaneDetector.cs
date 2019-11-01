@@ -24,10 +24,10 @@ namespace I4SWTMandatoryExercise2
             List<FlightData> planesInAirspace = new List<FlightData>();
             foreach (var plane in e.Planes)
             {
-                if ((Math.Abs(plane.xCoordinate - _airspace.Center._x) < (_airspace.SideLength / 2)) &&
-                    (Math.Abs(plane.yCoordinate - _airspace.Center._y) < (_airspace.SideLength / 2)) &&
-                    (plane.zCoordinate > _airspace.MinHeight) &&
-                    (plane.zCoordinate < _airspace.MaxHeight))
+                if ((Math.Abs(plane.xCoordinate - _airspace.Center._x) <= (_airspace.SideLength / 2)) &&
+                    (Math.Abs(plane.yCoordinate - _airspace.Center._y) <= (_airspace.SideLength / 2)) &&
+                    (plane.zCoordinate >= _airspace.MinHeight) &&
+                    (plane.zCoordinate <= _airspace.MaxHeight))
                 {
                     planesInAirspace.Add(plane);
                 }
