@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace I4SWTMandatoryExercise2
 {
@@ -31,7 +32,16 @@ namespace I4SWTMandatoryExercise2
             List<FlightData> listToReturn = new List<FlightData>();
             // Calculates the course and velocity based on the new flight data that has been sent and the previously sent data
             listToReturn = Calculator.CalculateCompassCourse(flightDataListOld, e.PlanesInAirspace);
-            listToReturn = Calculator.CalculateVelocity(flightDataListOld, e.PlanesInAirspace);
+            try
+            {
+                listToReturn = Calculator.CalculateVelocity(flightDataListOld, e.PlanesInAirspace);
+
+            }
+            catch (ArgumentException exception)
+            {
+                Console.WriteLine(exception); 
+                //There should be some error handling here
+            }
 
             render.DisplayData(listToReturn); // Displays the data after it has been calculated
 
