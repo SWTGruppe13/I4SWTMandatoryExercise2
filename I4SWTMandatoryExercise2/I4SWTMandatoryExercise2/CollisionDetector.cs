@@ -8,17 +8,6 @@ namespace I4SWTMandatoryExercise2
         void OnPlaneDetectorEvent(object sender, PlaneDetectorEventArgs e);
     }
 
-    public class CollisionDetectedEventArgs : EventArgs
-    {
-        public CollisionDetectedEventArgs(FlightData x, FlightData y)
-        {
-            Plane1 = x;
-            Plane2 = y;
-        }
-        public FlightData Plane1;
-        public FlightData Plane2;
-    }
-
     public class CollisionDetector : ICollisionDetector
     {
         private IAirSpacePlaneDetector _airSpacePlaneDetector;
