@@ -75,8 +75,15 @@ namespace ATM.test.unit
         }
 
         [Test]
-        public void Invalid_Coordinates_Not_Added_To_Airspace_1Valid_1Invalid_in_List_Expect1()
+        public void Planes_Added_To_Airspace_1Valid_1Invalid_Expect1()
         {
+
+            fd1.SetFlightData(100000000, 100000000, 0, new DateTime());
+            fd2.SetFlightData(50000, 50000, 5000, new DateTime());
+
+            _planesTestData.Add(fd1);
+            _planesTestData.Add(fd2);
+
             _uut.DetectAirplaneInAirspace(new object(), new PlaneDecodedEventArgs{ Planes = _planesTestData });
             //uut.OnAirplaneDetected(new PlaneDetectorEventArgs { PlanesInAirspace = planesTestData });
             Assert.That(_receivedEventArgs.PlanesInAirspace.Count, Is.EqualTo(1));
