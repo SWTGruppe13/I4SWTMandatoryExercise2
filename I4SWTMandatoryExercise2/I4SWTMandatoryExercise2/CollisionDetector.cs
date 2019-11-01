@@ -26,8 +26,8 @@ namespace I4SWTMandatoryExercise2
     public class CollisionDetector : ICollisionDetector
     {
         private IAirSpacePlaneDetector _airSpacePlaneDetector;
-        Renderer renderer = new Renderer();
-        Logger logger = new Logger();
+        private Renderer renderer = new Renderer();
+        public ILogger logger { get; set; } = new Logger();
         public CollisionDetector(IAirSpacePlaneDetector airSpacePlaneDetector)
         {
             this._airSpacePlaneDetector = airSpacePlaneDetector;
