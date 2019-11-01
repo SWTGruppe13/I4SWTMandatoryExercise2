@@ -41,7 +41,7 @@ namespace I4SWTMandatoryExercise2
                     {
                         renderer.DisplayAlarm();
                         logger.Log(e.PlanesInAirspace[i], e.PlanesInAirspace[j]);
-                        return; // ALARM event til logger
+                        return;
                     }
                 }
             }
