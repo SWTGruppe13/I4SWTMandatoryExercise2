@@ -15,30 +15,50 @@ namespace ATM.test.unit
     {
         private FlightDataController _uut;
         private IAirSpacePlaneDetector _fakeAirSpacePlaneDetector;
+        private IRenderer _fakeRenderer;
         private List<FlightData> _testPlanes;
+
 
         [SetUp]
         public void Setup()
         {
-            _testPlanes = new List<FlightData>();
-            FlightData F1 = new FlightData("1");
-            FlightData F2 = new FlightData("2");
-            F1.SetFlightData(50,50,500,new DateTime());
-            F2.SetFlightData(50,50,500,new DateTime());
-            _testPlanes.Add(F1);
-            _testPlanes.Add(F2);
-
             _fakeAirSpacePlaneDetector = Substitute.For<IAirSpacePlaneDetector>();
+            _fakeRenderer = Substitute.For<IRenderer>();
+            _uut = new FlightDataController(_fakeAirSpacePlaneDetector);
+            _uut.render = _fakeRenderer;
+            _testPlanes = new List<FlightData>();
 
+
+            // ListController Called ONCE so that flightDataList.Count > 0;
+            // Otherwise the Calculator and Renderer wont be called
+            FlightData F1 = new FlightData("1");
+            F1.SetFlightData(8000,8000,8000, new DateTime());
+            _testPlanes.Add(F1);
+            _uut.ListController(new object(), new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
         }
 
-        [Test] // Test til event
-        public void PlaneDetectorEvent_FlightdataController_RaisedEvent()
+        [Test]
+        public void FlightDataController_ListController_Called_Once_Render_NotCalled()
         {
-            _fakeAirSpacePlaneDetector.AirplaneDetected += Raise.EventWith<PlaneDetectorEventArgs>(
-                this,
-                new PlaneDetectorEventArgs() { PlanesInAirspace = _testPlanes });
+            _fakeRenderer.DidNotReceive().DisplayData(Arg.Any<List<FlightData>>());
+        }
 
+        [Test]
+        public void PlaneDetectorEvent_FlightDataController_ListController_Called()
+        {
+
+            FlightData F2 = new FlightData("2");
+            FlightData F3 = new FlightData("3");
+
+            F2.SetFlightData(8000,8000,8000, new DateTime());
+            F3.SetFlightData(8000,8000,8000, new DateTime());
+
+            _testPlanes.Add(F2);
+            _testPlanes.Add(F3);
+
+            _uut.ListController(new object(), new PlaneDetectorEventArgs(){PlanesInAirspace = _testPlanes});
+
+            _fakeRenderer.Received().DisplayData(Arg.Any<List<FlightData>>());
         }
     }
 }

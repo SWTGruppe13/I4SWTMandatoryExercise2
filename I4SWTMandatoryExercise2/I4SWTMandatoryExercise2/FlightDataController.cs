@@ -11,7 +11,7 @@ namespace I4SWTMandatoryExercise2
     {
         private List<FlightData> flightDataListOld = new List<FlightData>();
         private IAirSpacePlaneDetector airSpacePlaneDecOBJ;
-        Renderer render = new Renderer(); // interface injection some time
+        public IRenderer render { get; set; } = new Renderer();
 
         public FlightDataController(IAirSpacePlaneDetector airSpacePlaneDetector)
         {
