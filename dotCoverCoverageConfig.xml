@@ -20,7 +20,7 @@
         <FunctionMask>*</FunctionMask>
       </FilterEntry>
       <FilterEntry>
-        <ClassMask>Program</ClassMask>
+        <ClassMask>*.Program*</ClassMask>
       </FilterEntry>
     </ExcludeFilters>
   </Filters>
