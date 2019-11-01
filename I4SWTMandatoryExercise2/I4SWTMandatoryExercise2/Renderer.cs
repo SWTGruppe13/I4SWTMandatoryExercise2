@@ -10,7 +10,7 @@ namespace I4SWTMandatoryExercise2
 
     public class Renderer : IRenderer
     {
-        public IConsoleWriter Cw = new ConsoleWriter(); // ConsoleWriter object allows printing to the console
+        public IConsoleWriter Cw { get; set; } = new ConsoleWriter(); // ConsoleWriter object allows printing to the console
 
         // Prints flight data to the console
         public void DisplayData(List<FlightData> flightDataList)
