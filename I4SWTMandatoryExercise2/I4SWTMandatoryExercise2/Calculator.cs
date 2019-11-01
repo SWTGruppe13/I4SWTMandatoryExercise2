@@ -54,10 +54,18 @@ namespace I4SWTMandatoryExercise2
             {
                 var diffInSecs = (flight.List2.timestamp - flight.List1.timestamp).TotalSeconds; // Calculates the time between the two data points of the flight
 
-                // NOTE: Why is the order of flight one and two reversed? does it give a wrong result? or is it due to the zipping of the lists?
-                flight.List1.Velocity = (HorizontalDistance(flight.List2, flight.List1)+VerticalDistance(flight.List2, flight.List1)) / diffInSecs; // Divides the horizontal distance between the two data points with the time spent between them
+                if (diffInSecs != 0)
+                {
+                    // NOTE: Why is the order of flight one and two reversed? does it give a wrong result? or is it due to the zipping of the lists?
+                    flight.List1.Velocity = (HorizontalDistance(flight.List2, flight.List1) + VerticalDistance(flight.List2, flight.List1)) / diffInSecs; // Divides the horizontal distance between the two data points with the time spent between them
 
-                listToReturn.Add(flight.List1);
+                    listToReturn.Add(flight.List1);
+                }
+                else
+                {
+                    throw new ArgumentException("diffInSecs cannot be null");
+                }
+
             }
             return listToReturn;
         }

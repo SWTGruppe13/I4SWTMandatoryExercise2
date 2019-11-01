@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using I4SWTMandatoryExercise2;
+using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 
 namespace ATM.test.unit
@@ -94,15 +95,17 @@ namespace ATM.test.unit
             Assert.That(resultList[0].CompassCourse, Is.EqualTo(45));
         }
 
-        [TestCase(0, 1, 0, 1, 1.4)]
-        public void CalculateVelocity(int xCoordinate1, int xCoordinate2, int yCoordinate1, int yCoordinate2, double result)
+        [TestCase(0, 1, 0, 0, 0, 1, 1)] // STD positive values
+        [TestCase(0, 0, 0, 0, 0, 1, 0)] // Zero values
+        [TestCase(-2, -1, -2, -2, 0, 2, 0.5)] // negative values
+        public void CalculateVelocity(int xCoordinate1, int xCoordinate2, int yCoordinate1, int yCoordinate2, int sec1, int sec2, double result)
         {
 
             FlightData fd1 = new FlightData("1");
             FlightData fd2 = new FlightData("2");
 
-            fd1.SetFlightData(xCoordinate1, yCoordinate1, 0, new DateTime(2019, 10, 31, 13, 45, 0));
-            fd2.SetFlightData(xCoordinate2, yCoordinate2, 0, new DateTime(2019, 10, 31, 13, 45, 1));
+            fd1.SetFlightData(xCoordinate1, yCoordinate1, 0, new DateTime(2019, 10, 31, 13, 45, sec1));
+            fd2.SetFlightData(xCoordinate2, yCoordinate2, 0, new DateTime(2019, 10, 31, 13, 45, sec2));
 
             List<FlightData> list1 = new List<FlightData>();
             List<FlightData> list2 = new List<FlightData>();
@@ -115,6 +118,28 @@ namespace ATM.test.unit
             resultList = Calculator.CalculateVelocity(list1, list2);
 
             Assert.That(resultList[0].Velocity, Is.EqualTo(result).Within(0.1));
+        }
+
+        [Test]
+        public void CalculateVelocitySameTimeStampExceptionThrown()
+        {
+            FlightData fd1 = new FlightData("1");
+            FlightData fd2 = new FlightData("2");
+
+            fd1.SetFlightData(0, 0, 0, new DateTime(2019, 10, 31, 13, 45, 0));
+            fd2.SetFlightData(0, 0, 0, new DateTime(2019, 10, 31, 13, 45, 0));
+
+
+            List<FlightData> list1 = new List<FlightData>();
+            List<FlightData> list2 = new List<FlightData>();
+
+            list1.Add(fd1);
+            list2.Add(fd2);
+
+            List<FlightData> resultList = new List<FlightData>();
+
+            Assert.Throws<ArgumentException>(() => Calculator.CalculateVelocity(list1, list2)); // Should throw exception - devision by 0
+
         }
 
         [TestCase(1, 5, 1, 5, 5.6)]     // Simple functionality
