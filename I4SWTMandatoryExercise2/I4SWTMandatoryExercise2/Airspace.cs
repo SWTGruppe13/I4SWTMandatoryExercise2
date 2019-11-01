@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace I4SWTMandatoryExercise2
+﻿namespace I4SWTMandatoryExercise2
 {
     public interface IAirspace
     {
-        void CreateAirspace(double centerX, double centerY, double length);
+        void CreateAirspace(double centerX, double centerY);
         Point Center { get; set; }
     }
     public class Airspace : IAirspace
     {
-        public Airspace(double centerX, double centerY, double length)
+        public Airspace(double centerX, double centerY)
         {
-            CreateAirspace(centerX, centerY, length);
+            CreateAirspace(centerX, centerY);
         }
-        public void CreateAirspace(double centerX, double centerY, double length)
+        public void CreateAirspace(double centerX, double centerY)
         {
             Center = new Point(centerX,centerY);
         }

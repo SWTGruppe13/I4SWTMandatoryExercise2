@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace I4SWTMandatoryExercise2
 {
@@ -11,27 +10,31 @@ namespace I4SWTMandatoryExercise2
 
     public class Renderer : IRenderer
     {
+        public IConsoleWriter Cw = new ConsoleWriter(); // ConsoleWriter object allows printing to the console
+
+        // Prints flight data to the console
         public void DisplayData(List<FlightData> flightDataList)
         {
-            Console.WriteLine("list count in render: " + flightDataList.Count);
-            Console.WriteLine();
-            Console.WriteLine("------------------------------------------");
-            Console.WriteLine();
-            foreach (var fd in flightDataList)
+            // Separator between flight lists
+            Cw.WriteLine("");
+            Cw.WriteLine("------------------------------------------");
+            Cw.WriteLine("");
+
+            foreach (var fd in flightDataList) // Iterates through the planes and prints the data of each one
             {
-                Console.WriteLine("Flight ID: {0}", fd.ID.Substring(0, 6));
-                Console.WriteLine("x-coordinate: {0}", fd.xCoordinate);
-                Console.WriteLine("y-coordinate: {0}", fd.yCoordinate);
-                Console.WriteLine("Altitude: {0}", fd.zCoordinate);
-                Console.WriteLine("Horizontal Velocity: {0}", fd.Velocity);
-                Console.WriteLine("Course direction: {0}", fd.CompassCourse);
-                Console.WriteLine();
+                Cw.WriteLine(string.Format($"Flight ID: {fd.ID}"));
+                Cw.WriteLine(string.Format($"x-coordinate: {fd.xCoordinate}"));
+                Cw.WriteLine(string.Format($"y-coordinate: {fd.yCoordinate}"));
+                Cw.WriteLine(string.Format($"Altitude: {fd.zCoordinate}"));
+                Cw.WriteLine(string.Format($"Horizontal Velocity: {fd.Velocity}"));
+                Cw.WriteLine(string.Format($"Course direction: {fd.CompassCourse}"));
+                Cw.WriteLine("");
             }
         }
 
         public void DisplayAlarm()
         {
-            Console.WriteLine("ALARM!!!!!");
+            Cw.WriteLine("ALARM!!!!!");
         }
     }
 }

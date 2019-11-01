@@ -60,5 +60,7 @@ namespace ATM.test.unit
 
             _fakeRenderer.Received().DisplayData(Arg.Any<List<FlightData>>());
         }
+
+
     }
 }

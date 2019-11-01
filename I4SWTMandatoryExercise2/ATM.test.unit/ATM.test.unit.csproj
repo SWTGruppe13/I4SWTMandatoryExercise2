@@ -68,6 +68,7 @@
     <Compile Include="FlightDataControllerTest.cs" />
     <Compile Include="LoggerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RendererTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\I4SWTMandatoryExercise2\I4SWTMandatoryExercise2.csproj">

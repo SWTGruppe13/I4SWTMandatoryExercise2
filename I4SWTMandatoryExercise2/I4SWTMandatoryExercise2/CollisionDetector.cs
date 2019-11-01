@@ -21,16 +21,18 @@ namespace I4SWTMandatoryExercise2
 
         public void OnPlaneDetectorEvent(object sender, PlaneDetectorEventArgs e)
         {
-            for (int i = 0; i < e.PlanesInAirspace.Count; i++)
+            for (int i = 0; i < e.PlanesInAirspace.Count; i++) // Iterates through each plane in the list sent from AirSpacePlaneDetector
             {
-                for (int j = i+1; j < e.PlanesInAirspace.Count; j++)
+                for (int j = i+1; j < e.PlanesInAirspace.Count; j++) // Iterates through the remainder of the planes in the list
                 {
+                    // Checks if the distance between two planes is within the specified distance of each other
                     if ((Calculator.HorizontalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 300) &&
                         (Calculator.VerticalDistance(e.PlanesInAirspace[i], e.PlanesInAirspace[j]) < 5000))
                     {
+                        // Displays and alarm in the console window and adds an occurence to the log
                         renderer.DisplayAlarm();
                         logger.Log(e.PlanesInAirspace[i], e.PlanesInAirspace[j]);
-                        return; // ALARM event til logger
+                        return;
                     }
                 }
             }
